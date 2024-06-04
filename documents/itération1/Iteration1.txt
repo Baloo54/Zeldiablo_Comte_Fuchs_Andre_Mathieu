@@ -4,7 +4,8 @@ Itération n°1 :
 1.1 Création d'un labyrinthe par défaut
 Au lancement du jeu, un labyrinthe par défaut est créé et le personnage est placé au centre de celui-ci.
 1.2 Collision avec les Murs
-Lorsque le joueur demande à déplacer le personnage en direction d'un mur, le personnage reste bloqué et ne se déplace pas
+Lorsque le joueur demande à déplacer le personnage en direction d'un mur, le personnage reste bloqué et ne se déplace 
+1.3 Gestion des niveaux : le jeu est constituer de plusieurs niveaux
 1.5 Cases piégées
 Lorsqu’une entité (héros ou monstre) arrive sur une case piégée, il subit des dégâts.
 1.6 Ouverture de Passages secrets
@@ -12,7 +13,8 @@ Lorsqu’une entité (héros ou monstre) arrive sur une case d'ouverture, le lab
 Les portes peuvent donc constituer des pièges cachés puisqu’une case peut ouvrir les portes qui protègent le héros d'une horde de monstres.
 1.7 Fermeture de Passage
 Lorsqu’une entité (héros ou monstre) arrive sur une case de type fermeture, le labyrinthe se modifie et la porte liée à cette case se referme. Cela permet de faire des pièges retors (une case ouvre la porte, la case derrière la porte la referme).
-
+1.8 Gestion d'un labyrinthe multi-étages : Le labyrinthe est constitué de plusieurs étages. Chaque étage correspond à un niveau
+particulier. Des escaliers permettent de passer d'un étage à un autre
 
 3. Monstres et Bestioles en tout genre
 3.1 Collision avec un monstre
@@ -20,4 +22,8 @@ Lorsque le joueur demande au personnage de se déplacer vers une case contenant 
 3.2 Fantômes
 Le labyrinthe dispose d'un nouveau type de monstre : les fantômes
 
-
+Répartition des tâches :
+-Gabin :
+-Thomas :
+-Gabriel : 1.8, 1.3
+-Jules : 

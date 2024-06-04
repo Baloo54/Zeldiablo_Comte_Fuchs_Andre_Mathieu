@@ -11,6 +11,8 @@ class Labyrinthe
   +Labyrinthe(nom : String)
   +deplacerPerso(action : String)
   +etreFini() : Boolean
+  +descriptionLaby() : String
+  +choixNiveau(niveau : int) : void
   +getlengthY() : int
   +getLength() : int
   +getMur(x: int, y: int)
@@ -57,6 +59,10 @@ labyrinthe -> File : new File(cheminFichierParDefaut)
 File --> labyrinthe
 deactivate File
 labyrinthe --> main
+main -> labyrinthe : choixNiveau(niveau)
+labyrinthe --> main
+main -> labyrinthe : descriptionLaby()
+labyrinthe --> main : description
 deactivate labyrinthe
 deactivate main
 @enduml
