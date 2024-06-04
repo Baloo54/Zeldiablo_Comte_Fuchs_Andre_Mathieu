@@ -1,0 +1,20 @@
+@startuml
+
+participant "m:main" as main
+participant "labyrinthe:Labyrinthe" as labyrinthe
+participant "file : File" as File
+
+activate main
+main -> labyrinthe : new Labyrinthe(nomFichier)
+activate labyrinthe
+labyrinthe -> File : new File(cheminFichier)
+activate File
+
+File --> labyrinthe : FileNotFoundException
+labyrinthe -> File : new File(cheminFichierParDefaut)
+File --> labyrinthe
+deactivate File
+labyrinthe --> main
+deactivate labyrinthe
+deactivate main
+@enduml
