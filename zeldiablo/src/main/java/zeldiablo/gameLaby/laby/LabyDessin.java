@@ -28,8 +28,11 @@ public class LabyDessin implements DessinJeu {
                 }else if(labyrinthe.murs[i][j] instanceof Mur){ //a modifier après
                     gc.setFill(Color.BLACK);
                     gc.fillRect(i*tileWidth, j*tileHeight, tileWidth, tileHeight);
-                }else{
+                }else if (labyrinthe.murs[i][j] instanceof CaseVide){
                     gc.setFill(Color.WHITE);
+                    gc.fillRect(i*tileWidth, j*tileHeight, tileWidth, tileHeight);
+                } else if (labyrinthe.murs[i][j] instanceof CasePiegee){
+                    gc.setFill(Color.GRAY);
                     gc.fillRect(i*tileWidth, j*tileHeight, tileWidth, tileHeight);
                 }
             }
