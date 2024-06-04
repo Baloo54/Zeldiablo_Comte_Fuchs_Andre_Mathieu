@@ -23,8 +23,8 @@ public class Labyrinthe {
     public static final char MUR = 'X';
     public static final char PJ = 'P';
     public static final char VIDE = '.';
-
     public static final char PIEGE = 'T';
+    public static final char EFFET = 'E';
 
     /**
      * constantes actions possibles
@@ -128,6 +128,9 @@ public class Labyrinthe {
                         break;
                     case PIEGE:
                         this.murs[colonne][numeroLigne] = new CasePiegee();
+                        break;
+                    case EFFET:
+                        this.murs[colonne][numeroLigne] = new CaseEffet();
                         break;
                     case PJ:
                         // pas de mur
