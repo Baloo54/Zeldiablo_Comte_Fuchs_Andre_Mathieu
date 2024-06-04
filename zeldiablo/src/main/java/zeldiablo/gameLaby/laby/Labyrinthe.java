@@ -34,7 +34,7 @@ public class Labyrinthe {
     /**
      * les murs du labyrinthe
      */
-    public boolean[][] murs;
+    public Case[][] murs;
 
     /**
      * retourne la case suivante selon une actions
@@ -88,7 +88,7 @@ public class Labyrinthe {
         nbColonnes = Integer.parseInt(bfRead.readLine());
 
         // creation labyrinthe vide
-        this.murs = new boolean[nbColonnes][nbLignes];
+        this.murs = new Case[nbColonnes][nbLignes];
         this.pj = null;
 
         // lecture des cases
@@ -105,14 +105,14 @@ public class Labyrinthe {
                 char c = ligne.charAt(colonne);
                 switch (c) {
                     case MUR:
-                        this.murs[colonne][numeroLigne] = true;
+                        this.murs[colonne][numeroLigne] = new Mur();
                         break;
                     case VIDE:
-                        this.murs[colonne][numeroLigne] = false;
+                        this.murs[colonne][numeroLigne] = new CaseVide();
                         break;
                     case PJ:
                         // pas de mur
-                        this.murs[colonne][numeroLigne] = false;
+                        this.murs[colonne][numeroLigne] = new CaseVide();
                         // ajoute PJ
                         this.pj = new Perso(colonne, numeroLigne);
                         break;
@@ -146,7 +146,7 @@ public class Labyrinthe {
         int[] suivante = getSuivant(courante[0], courante[1], action);
 
         // si c'est pas un mur, on effectue le deplacement
-        if (!this.murs[suivante[0]][suivante[1]]) {
+        if (!(this.murs[suivante[0]][suivante[1]] instanceof Mur)) {
             // on met a jour personnage
             this.pj.x = suivante[0];
             this.pj.y = suivante[1];
@@ -191,7 +191,7 @@ public class Labyrinthe {
      * @param y
      * @return
      */
-    public boolean getMur(int x, int y) {
+    public Case getMur(int x, int y) {
         // utilise le tableau de boolean
         return this.murs[x][y];
     }
