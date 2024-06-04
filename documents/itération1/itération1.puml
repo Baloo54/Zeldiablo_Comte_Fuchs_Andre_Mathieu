@@ -12,7 +12,6 @@ class Labyrinthe
   +deplacerPerso(action : String)
   +etreFini() : Boolean
   +descriptionLaby() : String
-  +choixNiveau(niveau : int) : void
   +getlengthY() : int
   +getLength() : int
   +getMur(x: int, y: int)
@@ -22,6 +21,7 @@ class LabyJeu
 {
   -labyrinthe : Labyrinthe
 
+  +choixNiveau(niveau : int) : void
   +getLabyrinthe() : Labyrinthe
   +LabyJeu()
   +update(secondes double), clavier Clavier)
@@ -49,25 +49,21 @@ participant "labyrinthe:Labyrinthe" as labyrinthe
 participant "file : File" as File
 
 activate main
-main -> labyrinthe : new Labyrinthe(nomFichier)
+main -> labyrinthe : new Labyrinthe()
 activate labyrinthe
 labyrinthe -> File : new File(cheminFichier)
 activate File
-
 File --> labyrinthe : FileNotFoundException
 labyrinthe -> File : new File(cheminFichierParDefaut)
 File --> labyrinthe
 deactivate File
-labyrinthe --> main
-main -> labyrinthe : choixNiveau(niveau)
-labyrinthe --> main
 main -> labyrinthe : descriptionLaby()
 labyrinthe --> main : description
 deactivate labyrinthe
 deactivate main
 @enduml
 
-@startuml
+@startuml diagrameEntite
 title gestion des personnages
 Interface Entite {
     +attaquer(Entite e)
@@ -152,7 +148,7 @@ Entite "1" <-- "0..1" Arme : possede
 
 @enduml
 
-@startuml  sequenceLaby
+@startuml  sequenceEntite
 
 participant "m:main" as main
 participant "labyrinthe:Labyrinthe" as labyrinthe
@@ -178,4 +174,30 @@ pj --> labyrinthe : void
 labyrinthe --> main
 deactivate labyrinthe
 deactivate main
+@enduml
+
+@startuml  sequenceLabyJeu
+title Diagramme de séquence du jeu
+participant "m:main" as main
+participant "labyrinthe:Labyrinthe" as labyrinthe
+participant "file : File" as File
+
+activate main
+main -> labyrinthe : new Labyrinthe()
+activate labyrinthe
+labyrinthe -> File : new File(cheminFichierParDefaut)
+activate File
+File --> labyrinthe : FileNotFoundException
+File --> labyrinthe
+deactivate File
+main -> labyrinthe : choixNiveau(niveau)
+labyrinthe -> File : new File(cheminFichier)
+activate File
+File --> labyrinthe : FileNotFoundException
+File --> labyrinthe
+labyrinthe -> main 
+deactivate File
+deactivate labyrinthe
+deactivate main
+
 @enduml
