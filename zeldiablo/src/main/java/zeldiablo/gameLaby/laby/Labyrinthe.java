@@ -24,6 +24,8 @@ public class Labyrinthe {
     public static final char PJ = 'P';
     public static final char VIDE = '.';
 
+    public static final char PIEGE = 'T';
+
     /**
      * constantes actions possibles
      */
@@ -124,6 +126,9 @@ public class Labyrinthe {
                     case VIDE:
                         this.murs[colonne][numeroLigne] = new CaseVide();
                         break;
+                    case PIEGE:
+                        this.murs[colonne][numeroLigne] = new CasePiegee();
+                        break;
                     case PJ:
                         // pas de mur
                         this.murs[colonne][numeroLigne] = new CaseVide();
@@ -164,6 +169,8 @@ public class Labyrinthe {
             // on met a jour personnage
             this.pj.x = suivante[0];
             this.pj.y = suivante[1];
+            this.murs[suivante[0]][suivante[1]].interagir(this,this.pj); //modifier après pour que ca se modifie pour
+                                                                // tous les éléments de type personnage (monstres etc)
         }
     }
 
