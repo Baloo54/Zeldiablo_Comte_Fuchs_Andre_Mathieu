@@ -60,3 +60,126 @@ labyrinthe --> main
 deactivate labyrinthe
 deactivate main
 @enduml
+
+@startuml
+title gestion des personnages
+Interface Entite {
+    - nom : string
+    - pv : int
+    - force : int
+    - deplacement : int
+    - arme : Arme
+    - position : int[][]
+
+    +attaquer()
+    +seDeplacer()
+    +prendreDegats()
+    +getNom() : string
+    +getPv() : int
+    +getForce() : int
+    +getDeplacement() : int
+    +getArme() : Arme
+    +PrendreArme(arme : Arme)
+    +getPos() : int[][]
+}
+
+class Perso {
+    - nom : string
+    - pv : int
+    - force : int
+    - deplacement : int
+    - arme : Arme
+    - position : int[][]
+
+    +attaquer()
+    +seDeplacer()
+    +prendreDegats()
+    +getNom() : string
+    +getPv() : int
+    +getForce() : int
+    +getDeplacement() : int
+    +getArme() : Arme
+    +PrendreArme(arme : Arme)
+    +getPos() : int[][]
+
+}
+
+abstract class Monstre {
+    - nom : string
+    - pv : int
+    - force : int
+    - deplacement : int
+    - arme : Arme
+    - position : int[][]
+
+    +attaquer()
+    +seDeplacer()
+    +prendreDegats()
+    +getNom() : string
+    +getPv() : int
+    +getForce() : int
+    +getDeplacement() : int
+    +getArme() : Arme
+    +PrendreArme(arme : Arme)
+    +getPos() : int[][]
+}
+
+class Fantome {
+    - nom : string
+    - pv : int
+    - force : int
+    - deplacement : int
+    - arme : Arme
+    - position : int[][]
+
+    +attaquer()
+    +seDeplacer()
+    +prendreDegats()
+    +getNom() : string
+    +getPv() : int
+    +getForce() : int
+    +getDeplacement() : int
+}
+
+class Arme {
+    - nom : string
+    - degats : int
+
+    +getNom() : string
+    +getDegats() : int
+}
+
+Entite <|-- Perso
+Entite <|-- Monstre
+Monstre <|-- Fantome
+Entite "1" <-- "0..1" Arme : possede
+
+@enduml
+
+@startuml  sequenceLaby
+
+participant "m:main" as main
+participant "labyrinthe:Labyrinthe" as labyrinthe
+participant "monstre : Monstre" as Monstre
+participant "pj : Perso" as pj
+
+activate main
+main -> labyrinthe : new Labyrinthe(nomFichier)
+activate labyrinthe
+
+
+
+create Monstre
+labyrinthe --> Monstre : new Monstre()
+labyrinthe -> pj : SeDeplacer()
+pj -> Monstre : getPos()
+Monstre --> pj : int[5][5] position
+pj -> pj : getPos()
+pj --> pj : int[5][5] position
+pj --> labyrinthe : void
+
+
+labyrinthe --> main
+deactivate labyrinthe
+deactivate main
+@enduml
