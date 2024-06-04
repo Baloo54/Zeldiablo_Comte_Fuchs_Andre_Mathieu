@@ -16,17 +16,21 @@ public class LabyDessin implements DessinJeu {
         LabyJeu laby = (LabyJeu) jeu;
         final GraphicsContext gc = canvas.getGraphicsContext2D();
         Labyrinthe labyrinthe = laby.getLabyrinthe();
+
+        double tileWidth = canvas.getWidth()/labyrinthe.murs.length;
+        double tileHeight = canvas.getHeight()/labyrinthe.murs[0].length;
+
         for(int i = 0; i < labyrinthe.murs.length; i++){
             for(int j = 0; j < labyrinthe.murs[i].length; j++){
                 if(labyrinthe.pj.getX() == i && labyrinthe.pj.getY() == j){
                     gc.setFill(Color.RED);
-                    gc.fillOval(i*80, j*60, 80, 60);
+                    gc.fillOval(i*tileWidth, j*tileHeight, tileWidth, tileHeight);
                 }else if(labyrinthe.murs[i][j] instanceof Mur){ //a modifier après
                     gc.setFill(Color.BLACK);
-                    gc.fillRect(i*80, j*60, 80, 60);
+                    gc.fillRect(i*tileWidth, j*tileHeight, tileWidth, tileHeight);
                 }else{
                     gc.setFill(Color.WHITE);
-                    gc.fillRect(i*80, j*60, 80, 60);
+                    gc.fillRect(i*tileWidth, j*tileHeight, tileWidth, tileHeight);
                 }
             }
         }
