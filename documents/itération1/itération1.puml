@@ -49,20 +49,25 @@ participant "labyrinthe:Labyrinthe" as labyrinthe
 participant "file : File" as File
 
 activate main
-main -> labyrinthe : new Labyrinthe(nomFichier)
+main -> labyrinthe : new Labyrinthe()
 activate labyrinthe
+labyrinthe -> File : new File(cheminFichierParDefaut)
+activate File
+File --> labyrinthe
+deactivate File
+labyrinthe --> main
+
+main -> labyrinthe : choixNiveau(niveau)
 labyrinthe -> File : new File(cheminFichier)
 activate File
-
 File --> labyrinthe : FileNotFoundException
 labyrinthe -> File : new File(cheminFichierParDefaut)
 File --> labyrinthe
 deactivate File
-labyrinthe --> main
-main -> labyrinthe : choixNiveau(niveau)
-labyrinthe --> main
-main -> labyrinthe : descriptionLaby()
+
 labyrinthe --> main : description
+main -> labyrinthe : descriptionLaby()
+
 deactivate labyrinthe
 deactivate main
 @enduml
