@@ -1,0 +1,41 @@
+@startuml
+title Chargement du diagramme
+
+'''classes
+class Labyrinthe
+{
+  +pj : Perso
+  +murs : Boolean
+
+  +{static} get suivant(x: int, y: int, action: String) : int[]
+  +Labyrinthe(nom : String)
+  +deplacerPerso(action : String)
+  +etreFini() : Boolean
+  +getlengthY() : int
+  +getLength() : int
+  +getMur(x: int, y: int)
+}
+
+class LabyJeu
+{
+  -labyrinthe : Labyrinthe
+
+  +getLabyrinthe() : Labyrinthe
+  +LabyJeu()
+  +update(secondes double), clavier Clavier)
+  +init()
+  +etreFini() : Boolean
+}
+
+interface Jeu
+{
+  +update(secondes : double, clavier : Clavier)
+  +init()
+  +etreFini() : Boolean
+}
+
+'''relations
+Jeu <|.. LabyJeu
+LabyJeu "1" --> "*" Labyrinthe : -labyrinthes
+
+@enduml
