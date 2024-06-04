@@ -172,6 +172,13 @@ public class Labyrinthe {
             this.murs[suivante[0]][suivante[1]].interagir(this,this.pj); //modifier après pour que ca se modifie pour
                                                                 // tous les éléments de type personnage (monstres etc)
         }
+
+        // si c'est un monstre, ne pas effectuer le deplacement
+        if (this.murs[suivante[0]][suivante[1]] instanceof Monstre) {
+            // on met a jour personnage
+            this.pj.x = courante[0];
+            this.pj.y = courante[1];
+        }
     }
 
 

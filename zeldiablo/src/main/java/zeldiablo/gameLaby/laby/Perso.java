@@ -3,14 +3,17 @@ package zeldiablo.gameLaby.laby;
 /**
  * gere un personnage situe en x,y
  */
-public class Perso {
+public class Perso implements Entite {
 
     /**
      * position du personnage
      */
-    int x, y;
-    int pv = 3; //valeur de base
 
+    int pv = 3; //valeur de base
+    String nom;
+    int force;
+    Arme arme;
+    int x, y;
     /**
      * constructeur
      *
@@ -38,6 +41,16 @@ public class Perso {
         this.pv-=i;
     }
 
+    public void attaquer(Entite e){
+        e.subirDegats(this.force);
+    }
+
+
+    public void PrendreArme(Arme arme) {
+
+    }
+
+
     // ############################################
     // GETTER
     // ############################################
@@ -56,5 +69,21 @@ public class Perso {
     public int getY() {
         //getter
         return this.y;
+    }
+
+    public int getPv(){
+        return this.pv;
+    }
+
+    public int getForce(){
+        return this.force;
+    }
+
+    public Arme getArme(){
+        return this.arme;
+    }
+
+    public String getNom(){
+        return this.nom;
     }
 }

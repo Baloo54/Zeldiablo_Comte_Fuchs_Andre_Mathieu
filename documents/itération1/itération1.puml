@@ -70,43 +70,32 @@ deactivate main
 @startuml
 title gestion des personnages
 Interface Entite {
-    - nom : string
-    - pv : int
-    - force : int
-    - deplacement : int
-    - arme : Arme
-    - position : int[][]
-
-    +attaquer()
-    +seDeplacer()
-    +prendreDegats()
+    +attaquer(Entite e)
+    +SubirDegats(int i)
     +getNom() : string
     +getPv() : int
     +getForce() : int
-    +getDeplacement() : int
     +getArme() : Arme
     +PrendreArme(arme : Arme)
-    +getPos() : int[][]
+    +etrePresent(int dx, int dy) : boolean
 }
 
 class Perso {
     - nom : string
     - pv : int
     - force : int
-    - deplacement : int
     - arme : Arme
-    - position : int[][]
+    - x : int
+    - y : int
 
-    +attaquer()
-    +seDeplacer()
-    +prendreDegats()
+    +attaquer(Entite e)
+    +SubirDegats(int i)
     +getNom() : string
     +getPv() : int
     +getForce() : int
-    +getDeplacement() : int
     +getArme() : Arme
     +PrendreArme(arme : Arme)
-    +getPos() : int[][]
+    +etrePresent(int dx, int dy) : boolean
 
 }
 
@@ -114,43 +103,44 @@ abstract class Monstre {
     - nom : string
     - pv : int
     - force : int
-    - deplacement : int
     - arme : Arme
-    - position : int[][]
+    - x : int
+    - y : int
 
-    +attaquer()
-    +seDeplacer()
-    +prendreDegats()
+    +attaquer(Entite e)
+    +SubirDegats(int i)
     +getNom() : string
     +getPv() : int
     +getForce() : int
-    +getDeplacement() : int
     +getArme() : Arme
     +PrendreArme(arme : Arme)
-    +getPos() : int[][]
+    +etrePresent(int dx, int dy) : boolean
 }
 
 class Fantome {
     - nom : string
     - pv : int
     - force : int
-    - deplacement : int
     - arme : Arme
-    - position : int[][]
+    - x : int
+    - y : int
 
-    +attaquer()
-    +seDeplacer()
-    +prendreDegats()
+    +attaquer(Entite e)
+    +SubirDegats(int i)
     +getNom() : string
     +getPv() : int
     +getForce() : int
-    +getDeplacement() : int
+    +getArme() : Arme
+    +PrendreArme(arme : Arme)
+    +etrePresent(int dx, int dy) : boolean
 }
+
 
 class Arme {
     - nom : string
     - degats : int
 
+    +Arme(nom : string, degats : int)
     +getNom() : string
     +getDegats() : int
 }
