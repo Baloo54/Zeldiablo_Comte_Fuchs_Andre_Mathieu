@@ -1,0 +1,23 @@
+Itération n°1 :
+
+1. Gestion des Labyrinthes :
+1.1 Création d'un labyrinthe par défaut
+Au lancement du jeu, un labyrinthe par défaut est créé et le personnage est placé au centre de celui-ci.
+1.2 Collision avec les Murs
+Lorsque le joueur demande à déplacer le personnage en direction d'un mur, le personnage reste bloqué et ne se déplace pas
+1.5 Cases piégées
+Lorsqu’une entité (héros ou monstre) arrive sur une case piégée, il subit des dégâts.
+1.6 Ouverture de Passages secrets
+Lorsqu’une entité (héros ou monstre) arrive sur une case d'ouverture, le labyrinthe se modifie et la porte liée à cette case (située à un autre endroit dans le labyrinthe) s'ouvre.
+Les portes peuvent donc constituer des pièges cachés puisqu’une case peut ouvrir les portes qui protègent le héros d'une horde de monstres.
+1.7 Fermeture de Passage
+Lorsqu’une entité (héros ou monstre) arrive sur une case de type fermeture, le labyrinthe se modifie et la porte liée à cette case se referme. Cela permet de faire des pièges retors (une case ouvre la porte, la case derrière la porte la referme).
+
+
+3. Monstres et Bestioles en tout genre
+3.1 Collision avec un monstre
+Lorsque le joueur demande au personnage de se déplacer vers une case contenant un monstre, le personnage ne se déplace pas.
+3.2 Fantômes
+Le labyrinthe dispose d'un nouveau type de monstre : les fantômes
+
+
