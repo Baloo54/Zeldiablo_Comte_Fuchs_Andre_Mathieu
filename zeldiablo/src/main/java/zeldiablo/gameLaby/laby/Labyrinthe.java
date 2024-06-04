@@ -1,6 +1,7 @@
 package zeldiablo.gameLaby.laby;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -10,6 +11,11 @@ import java.io.IOException;
  * <ul> un personnage (x,y) </ul>
  */
 public class Labyrinthe {
+
+    /**
+     * Chemin pour le labyrinthe par défaut
+     */
+     public final static String DEFAULT_MAP = "../path"; // à modifier après
 
     /**
      * Constantes char
@@ -78,7 +84,15 @@ public class Labyrinthe {
      */
     public Labyrinthe(String nom) throws IOException {
         // ouvrir fichier
-        FileReader fichier = new FileReader(nom);
+        FileReader fichier;
+
+
+        try{
+            fichier = new FileReader(nom);
+        } catch (FileNotFoundException e){
+            fichier = new FileReader(DEFAULT_MAP);
+        }
+
         BufferedReader bfRead = new BufferedReader(fichier);
 
         int nbLignes, nbColonnes;
