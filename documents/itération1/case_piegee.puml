@@ -1,0 +1,20 @@
+@startuml
+participant "labyrinthe : Labyrinthe" as laby
+participant "CasePiegee : CasePiegee" as case
+participant "pj : Perso" as perso
+
+activate laby
+laby -> laby : deplacerPerso(String)
+laby -> laby : GetSuivant(int, int, String)
+alt suivant instanceOf casePiegee
+laby -> case : interagir(labyrinthe, pj)
+activate case
+case -> perso : subirDegats(1)
+activate perso
+perso --> case
+deactivate perso
+case --> laby
+deactivate case
+end
+deactivate laby
+@enduml
