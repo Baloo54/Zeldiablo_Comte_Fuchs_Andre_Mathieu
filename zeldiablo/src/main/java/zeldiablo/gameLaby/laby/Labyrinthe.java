@@ -33,6 +33,8 @@ public class Labyrinthe {
 
     public static final char STR_DESC = 'v';
 
+    public static final char FANTOME = 'F';
+
     /**
      * constantes actions possibles
      */
@@ -45,6 +47,8 @@ public class Labyrinthe {
      * attribut du personnage
      */
     public Perso pj;
+
+    public Fantome f;
 
     /**
      * les murs du labyrinthe
@@ -172,6 +176,10 @@ public class Labyrinthe {
                         case STR_DESC:
                             this.etages[i][colonne][numeroLigne] = new CaseEscalierDesc();
                             break;
+                        case FANTOME:
+                            this.murs[colonne][numeroLigne] = new CaseVide();
+                            this.f = new Fantome(colonne, numeroLigne);
+                            break;
                         case PJ:
                             // pas de mur
                             this.etages[i][colonne][numeroLigne] = new CaseVide();
@@ -205,26 +213,24 @@ public class Labyrinthe {
      * @param action une des actions possibles
      */
     public void deplacerPerso(String action) {
-        // case courante
-        int[] courante = {this.pj.x, this.pj.y};
 
-        // calcule case suivante
+        int[] courante = {this.pj.getX(), this.pj.getY()};
+
         int[] suivante = getSuivant(courante[0], courante[1], action);
 
-        // si c'est pas un mur, on effectue le deplacement
         if (!(this.murs[suivante[0]][suivante[1]] instanceof Mur)) {
-            // on met a jour personnage
-            this.pj.x = suivante[0];
-            this.pj.y = suivante[1];
-            this.murs[suivante[0]][suivante[1]].interagir(this,this.pj); //modifier après pour que ca se modifie pour
-                                                                // tous les éléments de type personnage (monstres etc)
-        }
+            boolean caseLibre = true;
 
-        // si c'est un monstre, ne pas effectuer le deplacement
-        if (this.murs[suivante[0]][suivante[1]] instanceof Entite) {
-            // on met a jour personnage
-            this.pj.x = courante[0];
-            this.pj.y = courante[1];
+            if ((this.pj.getX() == suivante[0] && this.pj.getY() == suivante[1]) ||
+                    (this.f != null && this.f.getX() == suivante[0] && this.f.getY() == suivante[1])) {
+                caseLibre = false;
+            }
+
+            if (caseLibre) {
+                this.pj.x = suivante[0];
+                this.pj.y = suivante[1];
+                this.murs[suivante[0]][suivante[1]].interagir(this, this.pj);
+            }
         }
     }
 

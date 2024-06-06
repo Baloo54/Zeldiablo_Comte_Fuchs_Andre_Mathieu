@@ -1,16 +1,14 @@
 package zeldiablo.gameLaby.laby;
 
 public  class Fantome implements Entite{
-    int pv;
-    String nom;
-    int force;
-    Arme arme;
+    int pv = 10;
+    String nom = "Fantome";
+    int force = 2;
+    Arme arme = null;
     int x, y;
 
-    public Fantome(String nom, int pv, int force, int x, int y) {
-        this.nom = nom;
-        this.pv = pv;
-        this.force = force;
+    public Fantome(int x, int y) {
+
         this.x = x;
         this.y = y;
     }
@@ -45,6 +43,23 @@ public  class Fantome implements Entite{
 
     public Arme getArme() {
         return arme;
+    }
+
+    public void interagir(Labyrinthe l, Perso p) {
+        {
+            System.out.println(""+p+" s'est fait attaquer par un Fantome !");
+        }
+        this.attaquer(p);
+    }
+
+    public int getX() {
+        // getter
+        return this.x;
+    }
+
+    public int getY() {
+        //getter
+        return this.y;
     }
 
 }

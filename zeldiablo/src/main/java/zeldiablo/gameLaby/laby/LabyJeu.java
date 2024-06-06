@@ -17,7 +17,7 @@ public class LabyJeu implements Jeu {
     }
 
     public LabyJeu() throws IOException {
-        this.labyrinthe = new Labyrinthe("zeldiablo/src/main/resources/labySimple/test_labymult.txt");
+        this.labyrinthe = new Labyrinthe("zeldiablo/src/main/resources/labySimple/test_labymultefjkscqdnklqzdzk.txt");
     }
 
     @Override
