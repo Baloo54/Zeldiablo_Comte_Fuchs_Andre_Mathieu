@@ -177,7 +177,7 @@ public class Labyrinthe {
         }
 
         // si c'est un monstre, ne pas effectuer le deplacement
-        if (this.murs[suivante[0]][suivante[1]] instanceof Monstre) {
+        if (this.murs[suivante[0]][suivante[1]] instanceof Entite) {
             // on met a jour personnage
             this.pj.x = courante[0];
             this.pj.y = courante[1];
@@ -225,5 +225,9 @@ public class Labyrinthe {
     public Case getMur(int x, int y) {
         // utilise le tableau de boolean
         return this.murs[x][y];
+    }
+
+    public Perso getPj() {
+        return this.pj;
     }
 }

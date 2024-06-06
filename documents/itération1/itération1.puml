@@ -95,23 +95,6 @@ class Perso {
 
 }
 
-abstract class Monstre {
-    - nom : string
-    - pv : int
-    - force : int
-    - arme : Arme
-    - x : int
-    - y : int
-
-    +attaquer(Entite e)
-    +SubirDegats(int i)
-    +getNom() : string
-    +getPv() : int
-    +getForce() : int
-    +getArme() : Arme
-    +PrendreArme(arme : Arme)
-    +etrePresent(int dx, int dy) : boolean
-}
 
 class Fantome {
     - nom : string
@@ -142,8 +125,7 @@ class Arme {
 }
 
 Entite <|-- Perso
-Entite <|-- Monstre
-Monstre <|-- Fantome
+Entite <|-- Fantome
 Entite "1" <-- "0..1" Arme : possede
 
 @enduml
@@ -152,7 +134,7 @@ Entite "1" <-- "0..1" Arme : possede
 
 participant "m:main" as main
 participant "labyrinthe:Labyrinthe" as labyrinthe
-participant "monstre : Monstre" as Monstre
+participant "fantome : Fantome" as Fantome
 participant "pj : Perso" as pj
 
 activate main
@@ -161,11 +143,11 @@ activate labyrinthe
 
 
 
-create Monstre
-labyrinthe --> Monstre : new Monstre()
+create Fantome
+labyrinthe --> Fantome : new Fantome()
 labyrinthe -> pj : SeDeplacer()
-pj -> Monstre : getPos()
-Monstre --> pj : int[5][5] position
+pj -> Fantome : getPos()
+Fantome --> pj : int[5][5] position
 pj -> pj : getPos()
 pj --> pj : int[5][5] position
 pj --> labyrinthe : void
