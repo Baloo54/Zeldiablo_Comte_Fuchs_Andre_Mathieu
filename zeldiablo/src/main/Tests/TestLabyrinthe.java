@@ -5,7 +5,7 @@ import zeldiablo.gameLaby.laby.CasePiegee;
 import zeldiablo.gameLaby.laby.Labyrinthe;
 import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 class TestLabyrinthe {
 
@@ -48,12 +48,10 @@ class TestLabyrinthe {
 
     void testSpecialCase() throws IOException {
         Labyrinthe labyrinthe = new Labyrinthe("zeldiablo/src/main/resources/labySimple/labyTest.txt");
-        int initialX = labyrinthe.getPj().getX();
-        int initialY = labyrinthe.getPj().getY();
 
         labyrinthe.deplacerPerso(Labyrinthe.DROITE);
-        assertTrue(labyrinthe.murs[labyrinthe.getPj().getX()][labyrinthe.getPj().getY()] instanceof CasePiegee);
+        assertInstanceOf(CasePiegee.class, labyrinthe.murs[labyrinthe.getPj().getX()][labyrinthe.getPj().getY()]);
         labyrinthe.deplacerPerso(Labyrinthe.BAS);
-        assertTrue(labyrinthe.murs[labyrinthe.getPj().getX()][labyrinthe.getPj().getY()] instanceof CaseEffet);
+        assertInstanceOf(CaseEffet.class, labyrinthe.murs[labyrinthe.getPj().getX()][labyrinthe.getPj().getY()]);
     }
 }
