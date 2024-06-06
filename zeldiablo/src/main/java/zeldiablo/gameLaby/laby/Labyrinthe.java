@@ -15,7 +15,7 @@ public class Labyrinthe {
     /**
      * Chemin pour le labyrinthe par défaut
      */
-     public final static String DEFAULT_MAP = "../path"; // à modifier après
+     public final static String DEFAULT_MAP = "zeldiablo/src/main/resources/labySimple/laby_default"; // à modifier après
 
     /**
      * Constantes char
