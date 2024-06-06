@@ -1,0 +1,36 @@
+@startuml
+participant "labyrinthe : Labyrinthe" as laby
+participant "bfRead : BufferedReader" as bf1
+participant "bfReadMap : BufferedReader" as bf2
+participant "case Case" as case
+
+activate laby
+laby -> bf1 : new BufferedReader()
+activate bf1
+laby -> bf1 : readLine()
+
+bf1 --> laby : nbLignes
+laby -> bf1 : readLine()
+bf1 --> laby : nbColonnes
+laby -> bf1 : readLine()
+bf1 --> laby : nbEtages
+loop nbEtages times
+    laby -> bf1 : readLine()
+    bf1 --> laby : nom labyrinthe
+    laby -> bf2 : new BufferedReader()
+    activate bf2
+
+    loop nblignes time
+        laby -> bf2 : readLine()
+        bf2 -> laby : char
+        laby -> case : new Case()
+        activate case
+        case --> laby
+        deactivate case
+    end
+    bf2 --> laby
+    deactivate bf2
+end
+deactivate bf1
+deactivate laby
+@enduml

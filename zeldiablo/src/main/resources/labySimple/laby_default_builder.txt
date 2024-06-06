@@ -1,0 +1,4 @@
+10
+10
+1
+zeldiablo/src/main/resources/labySimple/laby_default

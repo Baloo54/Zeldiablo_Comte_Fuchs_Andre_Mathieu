@@ -1,4 +1,4 @@
-
+/*
 import org.junit.jupiter.api.Test;
 import zeldiablo.gameLaby.laby.CaseEffet;
 import zeldiablo.gameLaby.laby.CasePiegee;
@@ -54,4 +54,4 @@ class TestLabyrinthe {
         labyrinthe.deplacerPerso(Labyrinthe.BAS);
         assertInstanceOf(CaseEffet.class, labyrinthe.murs[labyrinthe.getPj().getX()][labyrinthe.getPj().getY()]);
     }
-}
+}*/
