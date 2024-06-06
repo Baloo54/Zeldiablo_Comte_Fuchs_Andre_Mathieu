@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * classe labyrinthe. represente un labyrinthe avec
@@ -26,6 +27,10 @@ public class Labyrinthe {
     public static final char PIEGE = 'T';
     public static final char EFFET = 'E';
 
+    public static final char STR_ASC = '^';
+
+    public static final char STR_DESC = 'v';
+
     /**
      * constantes actions possibles
      */
@@ -43,6 +48,12 @@ public class Labyrinthe {
      * les murs du labyrinthe
      */
     public Case[][] murs;
+
+    public Case[][][] etages;
+
+    public int nbEtages;
+
+    public int etageCourant;
 
     /**
      * retourne la case suivante selon une actions
@@ -103,50 +114,81 @@ public class Labyrinthe {
         // lecture nbcolonnes
         nbColonnes = Integer.parseInt(bfRead.readLine());
 
+        //lecture nombre d'étages
+        this.nbEtages = Integer.parseInt(bfRead.readLine());
+
+        this.etages = new Case[nbEtages][nbColonnes][nbLignes];
         // creation labyrinthe vide
         this.murs = new Case[nbColonnes][nbLignes];
         this.pj = null;
 
-        // lecture des cases
-        String ligne = bfRead.readLine();
+        for(int i = 0; i < nbEtages; i++) {
 
-        // stocke les indices courants
-        int numeroLigne = 0;
+            FileReader fichierMap;
 
-        // parcours le fichier
-        while (ligne != null) {
+            String etage = bfRead.readLine();
 
-            // parcours de la ligne
-            for (int colonne = 0; colonne < ligne.length(); colonne++) {
-                char c = ligne.charAt(colonne);
-                switch (c) {
-                    case MUR:
-                        this.murs[colonne][numeroLigne] = new Mur();
-                        break;
-                    case VIDE:
-                        this.murs[colonne][numeroLigne] = new CaseVide();
-                        break;
-                    case PIEGE:
-                        this.murs[colonne][numeroLigne] = new CasePiegee();
-                        break;
-                    case EFFET:
-                        this.murs[colonne][numeroLigne] = new CaseEffet();
-                        break;
-                    case PJ:
-                        // pas de mur
-                        this.murs[colonne][numeroLigne] = new CaseVide();
-                        // ajoute PJ
-                        this.pj = new Perso(colonne, numeroLigne);
-                        break;
+            System.out.println(etage);
 
-                    default:
-                        throw new Error("caractere inconnu " + c);
+            try{
+                fichierMap = new FileReader(etage);
+            } catch (FileNotFoundException e){
+                fichierMap = new FileReader(DEFAULT_MAP);
+            }
+            BufferedReader bfReadMap = new BufferedReader(fichierMap);
+
+            // lecture des cases
+            String ligne = bfReadMap.readLine();
+            System.out.println(ligne);
+            // stocke les indices courants
+            int numeroLigne = 0;
+
+            // parcours le fichier
+            while (ligne != null) {
+
+                // parcours de la ligne
+                for (int colonne = 0; colonne < ligne.length(); colonne++) {
+
+                    char c = ligne.charAt(colonne);
+                    System.out.println(ligne + " : "+c);
+                    switch (c) {
+                        case MUR:
+                            this.etages[i][colonne][numeroLigne] = new Mur();
+                            break;
+                        case VIDE:
+                            this.etages[i][colonne][numeroLigne] = new CaseVide();
+                            break;
+                        case PIEGE:
+                            this.etages[i][colonne][numeroLigne] = new CasePiegee();
+                            break;
+                        case EFFET:
+                            this.etages[i][colonne][numeroLigne] = new CaseEffet();
+                            break;
+                        case STR_ASC:
+                            this.etages[i][colonne][numeroLigne] = new CaseEscalierAsc();
+                            break;
+                        case STR_DESC:
+                            this.etages[i][colonne][numeroLigne] = new CaseEscalierDesc();
+                            break;
+                        case PJ:
+                            // pas de mur
+                            this.etages[i][colonne][numeroLigne] = new CaseVide();
+                            // ajoute PJ
+                            this.pj = new Perso(colonne, numeroLigne);
+                            this.murs = this.etages[i];
+                            this.etageCourant = i;
+                            break;
+
+                        default:
+                            throw new Error("caractere inconnu " + c);
+                    }
                 }
+
+                // lecture
+                ligne = bfReadMap.readLine();
+                numeroLigne++;
             }
 
-            // lecture
-            ligne = bfRead.readLine();
-            numeroLigne++;
         }
 
         // ferme fichier

@@ -37,6 +37,12 @@ public class LabyDessin implements DessinJeu {
                 } else if (labyrinthe.murs[i][j] instanceof CaseEffet){
                     gc.setFill(Color.GREEN);
                     gc.fillRect(i*tileWidth, j*tileHeight, tileWidth, tileHeight);
+                } else if (labyrinthe.murs[i][j] instanceof CaseEscalierAsc){
+                    gc.setFill(Color.DARKGRAY);
+                    gc.fillRect(i*tileWidth, j*tileHeight, tileWidth, tileHeight);
+                } else if (labyrinthe.murs[i][j] instanceof CaseEscalierDesc){
+                    gc.setFill(Color.DARKGRAY);
+                    gc.fillRect(i*tileWidth, j*tileHeight, tileWidth, tileHeight);
                 }
             }
         }

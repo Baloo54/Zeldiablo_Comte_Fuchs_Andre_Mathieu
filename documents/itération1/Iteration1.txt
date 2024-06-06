@@ -19,8 +19,7 @@ Lorsqu’une entité (héros ou monstre) arrive sur une case d'ouverture, le lab
 Les portes peuvent donc constituer des pièges cachés puisqu’une case peut ouvrir les portes qui protègent le héros d'une horde de monstres.
 1.7 Fermeture de Passage
 Lorsqu’une entité (héros ou monstre) arrive sur une case de type fermeture, le labyrinthe se modifie et la porte liée à cette case se referme. Cela permet de faire des pièges retors (une case ouvre la porte, la case derrière la porte la referme).
-1.8 Gestion d'un labyrinthe multi-étages : Le labyrinthe est constitué de plusieurs étages. Chaque étage correspond à un niveau
-particulier. Des escaliers permettent de passer d'un étage à un autre
+
 
 3. Monstres et Bestioles en tout genre
 3.1 Collision avec un monstre

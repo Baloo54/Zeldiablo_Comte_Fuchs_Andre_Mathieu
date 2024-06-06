@@ -1,0 +1,9 @@
+1.8 Gestion d'un labyrinthe multi-étages : Le labyrinthe est constitué de plusieurs étages. Chaque étage correspond à un niveau
+particulier. Des escaliers permettent de passer d'un étage à un autre
+
+
+Répartition des tâches :
+-Gabin : 1.8
+-Thomas :
+-Gabriel :
+-Jules :
