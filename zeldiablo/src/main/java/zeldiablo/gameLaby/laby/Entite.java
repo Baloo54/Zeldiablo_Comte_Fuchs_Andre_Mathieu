@@ -14,4 +14,8 @@ public interface Entite {
     Arme getArme();
     void PrendreArme(Arme arme);
     boolean etrePresent(int dx, int dy);
+
+    int getX();
+
+    int getY();
 }

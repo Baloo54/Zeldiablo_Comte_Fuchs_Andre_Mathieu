@@ -179,7 +179,7 @@ public class Labyrinthe {
                             this.etages[i][colonne][numeroLigne] = new CaseEscalierDesc();
                             break;
                         case FANTOME:
-                            this.murs[colonne][numeroLigne] = new CaseVide();
+                            this.etages[i][colonne][numeroLigne] = new CaseVide();
                             entites.get(i).add(new Fantome(colonne, numeroLigne));
                             break;
                         case PJ:
@@ -222,12 +222,11 @@ public class Labyrinthe {
 
         if (!(this.murs[suivante[0]][suivante[1]] instanceof Mur)) {
             boolean caseLibre = true;
-
-            if ((this.pj.getX() == suivante[0] && this.pj.getY() == suivante[1]) ||
-                    (this.f != null && this.f.getX() == suivante[0] && this.f.getY() == suivante[1])) {
-                caseLibre = false;
+            for(int i = 0; i < this.entites.get(this.etageCourant).size(); i++){
+                if (this.entites.get(this.etageCourant).get(i).getX() == suivante[0] &&  this.entites.get(this.etageCourant).get(i).getY() == suivante[1]){
+                    caseLibre = false;
+                }
             }
-
             if (caseLibre) {
                 this.pj.x = suivante[0];
                 this.pj.y = suivante[1];

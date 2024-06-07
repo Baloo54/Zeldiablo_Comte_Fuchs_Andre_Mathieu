@@ -43,10 +43,15 @@ public class LabyDessin implements DessinJeu {
                 } else if (labyrinthe.murs[i][j] instanceof CaseEscalierDesc){
                     gc.setFill(Color.DARKGRAY);
                     gc.fillRect(i*tileWidth, j*tileHeight, tileWidth, tileHeight);
-                } else if(labyrinthe.f.getX() == i && labyrinthe.f.getY() == j){
-                    gc.setFill(Color.BLACK);
-                    gc.fillOval(i*tileWidth, j*tileHeight, tileWidth, tileHeight);
                 }
+            }
+        }
+
+        for(int i = 0; i < labyrinthe.entites.get(labyrinthe.etageCourant).size(); i++){
+            Entite e = labyrinthe.entites.get(labyrinthe.etageCourant).get(i);
+            if(e instanceof Fantome){
+                gc.setFill(Color.BLACK);
+                gc.fillOval(e.getX()*tileWidth, e.getY()*tileHeight, tileWidth, tileHeight);
             }
         }
     }
