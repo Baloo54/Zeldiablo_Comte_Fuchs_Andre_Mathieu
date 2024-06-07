@@ -43,10 +43,13 @@ public class Labyrinthe {
     public static final String GAUCHE = "Gauche";
     public static final String DROITE = "Droite";
 
+    public static final String ATTAQUE = "Attaque";
+
     /**
      * attribut du personnage
      */
-    public Perso pj;
+    public static Perso pj;
+    public static int directionPerso = 0; // 0 : gauche; 1 : haut; 2 : droite; 3 : bas;
 
     ArrayList<ArrayList<Entite>> entites = new ArrayList<>(); //liste des entités pour chaque étage
 
@@ -73,18 +76,22 @@ public class Labyrinthe {
         switch (action) {
             case HAUT:
                 // on monte une ligne
+                pj.setDirection (1);
                 y--;
                 break;
             case BAS:
                 // on descend une ligne
+                pj.setDirection(3);
                 y++;
                 break;
             case DROITE:
                 // on augmente colonne
+                pj.setDirection(2);
                 x++;
                 break;
             case GAUCHE:
                 // on augmente colonne
+                pj.setDirection(0);
                 x--;
                 break;
             default:
@@ -232,6 +239,33 @@ public class Labyrinthe {
                 this.pj.y = suivante[1];
                 this.murs[suivante[0]][suivante[1]].interagir(this, this.pj);
             }
+        }
+    }
+
+    public void checkAttaquePerso(){
+        int[] target = {pj.getX(), pj.getY()};
+        switch(pj.getDirection()) {
+            case 0:
+                target[0]--;
+                break;
+            case 1:
+                target[1]--;
+                break;
+            case 2:
+                target[0]++;
+                break;
+            case 3:
+                target[1]++;
+                break;
+        }
+        for(int i = 0; i < this.entites.get(this.etageCourant).size(); i++){
+            Entite e = this.entites.get(this.etageCourant).get(i);
+            if(e.getX() == target[0] && e.getY() == target[1]){
+                System.out.println("heyya !");
+                pj.attaquer(e);
+
+            }
+
         }
     }
 

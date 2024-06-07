@@ -5,6 +5,7 @@ import static zeldiablo.gameLaby.laby.Labyrinthe.BAS;
 import static zeldiablo.gameLaby.laby.Labyrinthe.DROITE;
 import static zeldiablo.gameLaby.laby.Labyrinthe.GAUCHE;
 import static zeldiablo.gameLaby.laby.Labyrinthe.HAUT;
+import static zeldiablo.gameLaby.laby.Labyrinthe.ATTAQUE;
 import zeldiablo.moteurJeu.Clavier;
 import zeldiablo.moteurJeu.Jeu;
 
@@ -30,6 +31,8 @@ public class LabyJeu implements Jeu {
             this.labyrinthe.deplacerPerso(GAUCHE);
         } else if (clavier.droite) {
             this.labyrinthe.deplacerPerso(DROITE);
+        } else if (clavier.attaque) {
+            this.labyrinthe.checkAttaquePerso();
         }
     }
 

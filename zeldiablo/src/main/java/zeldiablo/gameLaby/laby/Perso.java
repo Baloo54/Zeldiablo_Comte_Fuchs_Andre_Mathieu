@@ -14,6 +14,8 @@ public class Perso implements Entite {
     int force;
     Arme arme;
     int x, y;
+
+    int direction;  // 0 : gauche; 1 : haut; 2 : droite; 3 : bas;
     /**
      * constructeur
      *
@@ -23,6 +25,7 @@ public class Perso implements Entite {
     public Perso(int dx, int dy) {
         this.x = dx;
         this.y = dy;
+        this.direction = 0;
     }
 
     /**
@@ -85,5 +88,13 @@ public class Perso implements Entite {
 
     public String getNom(){
         return this.nom;
+    }
+
+    public int getDirection(){
+        return this.direction;
+    }
+
+    public void setDirection(int d){
+        this.direction = d;
     }
 }
