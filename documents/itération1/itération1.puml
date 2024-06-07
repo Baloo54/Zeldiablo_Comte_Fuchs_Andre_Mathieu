@@ -12,7 +12,220 @@ class Labyrinthe
   +etreFini() : Boolean
   +descriptionLaby() : String
   +getlengthY() : int
-  +getLength() : int
+  +getLength()@startuml diagrammeLaby
+              title Chargement du diagramme
+
+              '''classes
+              class Labyrinthe
+              {
+                +pj : Perso
+
+                +{static} get suivant(x: int, y: int, action: String) : int[]
+                +Labyrinthe(nom : String)
+                +deplacerPerso(action : String)
+                +etreFini() : Boolean
+                +descriptionLaby() : String
+                +getlengthY() : int
+                +getLength() : int
+                +getMur(x: int, y: int)
+              }
+
+              class LabyJeu
+              {
+                -labyrinthe : Labyrinthe
+
+                +choixNiveau(niveau : int) : void
+                +getLabyrinthe() : Labyrinthe
+                +LabyJeu()
+                +update(secondes double), clavier Clavier)
+                +init()
+                +etreFini() : Boolean
+              }
+
+              interface Jeu
+              {
+                +update(secondes : double, clavier : Clavier)
+                +init()
+                +etreFini() : Boolean
+              }
+
+              interface Case {
+                  +interagir(l : Labyrinthe, p:  Perso)
+              }
+
+              class Mur {}
+
+              class CaseVide {}
+
+              class CaseEffet{}
+
+              class CasePiegee{}
+
+              '''relations
+              Jeu <|.. LabyJeu
+
+              Case <|.. CasePiegee
+              Case <|.. CaseEffet
+              Case <|.. CaseVide
+              Case <|.. Mur
+
+              LabyJeu "1" --> "*" Labyrinthe : -labyrinthes
+
+              Labyrinthe "1" --> "*" Case : +murs[][]
+
+              @enduml
+
+              @startuml  sequenceLaby
+
+              participant "m:main" as main
+              participant "labyrinthe:Labyrinthe" as labyrinthe
+              participant "file : File" as File
+
+              activate main
+              main -> labyrinthe : new Labyrinthe()
+              activate labyrinthe
+              labyrinthe -> File : new File(cheminFichier)
+              activate File
+              File --> labyrinthe : FileNotFoundException
+              labyrinthe -> File : new File(cheminFichierParDefaut)
+              File --> labyrinthe
+              deactivate File
+              main -> labyrinthe : descriptionLaby()
+              labyrinthe --> main : description
+              deactivate labyrinthe
+              deactivate main
+              @enduml
+
+              @startuml diagrameEntite
+              title gestion des personnages
+              Interface Entite {
+                  +attaquer(Entite e)
+                  +SubirDegats(int i)
+                  +getNom() : string
+                  +getPv() : int
+                  +getForce() : int
+                  +getArme() : Arme
+                  +PrendreArme(arme : Arme)
+                  +etrePresent(int dx, int dy) : boolean
+              }
+
+              class Perso {
+                  - nom : string
+                  - pv : int
+                  - force : int
+                  - arme : Arme
+                  - x : int
+                  - y : int
+
+                  +attaquer(Entite e)
+                  +SubirDegats(int i)
+                  +getNom() : string
+                  +getPv() : int
+                  +getForce() : int
+                  +getArme() : Arme
+                  +PrendreArme(arme : Arme)
+                  +etrePresent(int dx, int dy) : boolean
+
+              }
+
+
+              class Fantome {
+                  - nom : string
+                  - pv : int
+                  - force : int
+                  - arme : Arme
+                  - x : int
+                  - y : int
+
+                  +attaquer(Entite e)
+                  +SubirDegats(int i)
+                  +getNom() : string
+                  +getPv() : int
+                  +getForce() : int
+                  +getArme() : Arme
+                  +PrendreArme(arme : Arme)
+                  +etrePresent(int dx, int dy) : boolean
+              }
+
+
+              class Arme {
+                  - nom : string
+                  - degats : int
+
+                  +Arme(nom : string, degats : int)
+                  +getNom() : string
+                  +getDegats() : int
+              }
+
+              Entite <|-- Perso
+              Entite <|-- Fantome
+              Entite "1" <-- "0..1" Arme : possede
+
+              @enduml
+
+
+              @startuml  sequenceLabyJeu
+              title Diagramme de séquence du jeu
+              participant "m:main" as main
+              participant "labyrinthe:Labyrinthe" as labyrinthe
+              participant "file : File" as File
+
+              activate main
+              main -> labyrinthe : new Labyrinthe()
+              activate labyrinthe
+              labyrinthe -> File : new File(cheminFichierParDefaut)
+              activate File
+              File --> labyrinthe : FileNotFoundException
+              File --> labyrinthe
+              deactivate File
+              main -> labyrinthe : choixNiveau(niveau)
+              labyrinthe -> File : new File(cheminFichier)
+              activate File
+              File --> labyrinthe : FileNotFoundException
+              File --> labyrinthe
+              labyrinthe -> main
+              deactivate File
+              deactivate labyrinthe
+              deactivate main
+
+              @enduml
+
+              @startuml
+              title Diagramme de séquence du jeu
+
+              actor Joueur as joueur
+              participant "labyrinthe : Labyrinthe" as labyrinthe
+              participant "file : File" as file
+
+
+              activate joueur
+              joueur -> labyrinthe : new Labyrinthe(nomFichier)
+              activate labyrinthe
+
+              labyrinthe -> file : new FileReader(nomFichier)
+              activate file
+              file -> labyrinthe : lireLignes()
+              deactivate file
+
+              loop pour chaque ligne du fichier contenant les entités
+                  labyrinthe -> labyrinthe : new Entite(x, y)
+                  alt type == Fantome
+                      labyrinthe -> Fantome : new Fantome(x, y)
+                      activate Fantome
+                      Fantome -> labyrinthe : entites.add(Fantome)
+
+                  end
+              end
+
+              joueur -> labyrinthe : jouer()
+              deactivate labyrinthe
+              deactivate joueur
+
+              @enduml
+
+
+
+ : int
   +getMur(x: int, y: int)
 }
 

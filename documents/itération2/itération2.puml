@@ -1,0 +1,113 @@
+@startuml  Collision entre Monstres(Fantome) et Personnage
+
+participant "m:main" as main
+participant "labyrinthe:Labyrinthe" as labyrinthe
+participant "fantome : Fantome" as Fantome
+participant "pj : Perso" as pj
+
+activate main
+main -> labyrinthe : new Labyrinthe(nomFichier)
+activate labyrinthe
+
+
+create Fantome
+labyrinthe --> Fantome : new Fantome()
+labyrinthe -> pj : SeDeplacer()
+pj -> Fantome : getPos()
+Fantome --> pj : int[5][5] position
+pj -> pj : getPos()
+pj --> pj : int[5][5] position
+pj --> labyrinthe : void
+
+
+labyrinthe --> main
+deactivate labyrinthe
+deactivate main
+@enduml
+
+@startuml déplacement Aléatoire des monstres
+
+participant "m:main" as main
+participant "labyrinthe:Labyrinthe" as Laby
+participant "monstre:Monstre" as monstre
+participant "random:Random" as random
+participant "case:Case" as case
+
+activate main
+main -> Laby : déplacerMonstres()
+activate Laby
+
+alt déplacement des Monstres
+    loop pour chaque monstre
+        Laby -> random : getDirectionRandom()
+        activate random
+        random --> Laby : String action
+        deactivate random
+
+        Laby -> monstre : deplacerMonstre(action)
+        activate monstre
+
+        monstre -> monstre : getX(), getY()
+        monstre --> monstre : int[] courante
+
+        monstre -> Laby : getSuivant(courante[0], courante[1], action)
+        Laby --> monstre : int[] suivante
+
+        monstre -> case : interagir(Laby, monstre)
+        activate case
+        case --> monstre : void
+        deactivate case
+
+        monstre --> Laby : void
+        deactivate monstre
+    end
+end
+
+Laby --> main : void
+deactivate Laby
+deactivate main
+
+@enduml
+
+@startuml
+
+participant "labyrinthe : Labyrinthe" as laby
+participant "passageSecret : PassageSecret" as secret
+participant "labyDessin : LabyDessin" as dessin
+
+laby -> laby : deplacerPero(action : String)
+
+
+
+alt si c'est pas un mur, on effectue le deplacement
+
+  alt si la case est d'instance PassageSecret
+
+
+
+laby -> secret : interagir(laby : Labyrinthe, perso : Personnage)
+
+activate secret
+
+  end
+
+end
+
+
+
+secret --> laby
+
+
+
+deactivate secret
+
+
+laby -> dessin : dessinerJeu(jeu :Jeu, canvas Canvas)
+activate dessin
+
+dessin --> laby
+
+deactivate dessin
+
+@enduml
+

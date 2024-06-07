@@ -1,9 +1,11 @@
 1.8 Gestion d'un labyrinthe multi-étages : Le labyrinthe est constitué de plusieurs étages. Chaque étage correspond à un niveau
 particulier. Des escaliers permettent de passer d'un étage à un autre
-
+2.2 Déplacement aléatoire des monstres : Régulièrement, le jeu demande aux monstres de se déplacer dans une direction aléatoire.
+3.1 Collision avec un monstre
+Lorsque le joueur demande au personnage de se déplacer vers une case contenant un monstre, le personnage ne se déplace pas.
 
 Répartition des tâches :
 -Gabin : 1.8
 -Thomas :
 -Gabriel :
--Jules :
+-Jules : 2.2, 3.1

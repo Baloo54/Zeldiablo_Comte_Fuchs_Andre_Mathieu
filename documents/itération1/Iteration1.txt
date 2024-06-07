@@ -19,11 +19,12 @@ Lorsqu’une entité (héros ou monstre) arrive sur une case d'ouverture, le lab
 Les portes peuvent donc constituer des pièges cachés puisqu’une case peut ouvrir les portes qui protègent le héros d'une horde de monstres.
 1.7 Fermeture de Passage
 Lorsqu’une entité (héros ou monstre) arrive sur une case de type fermeture, le labyrinthe se modifie et la porte liée à cette case se referme. Cela permet de faire des pièges retors (une case ouvre la porte, la case derrière la porte la referme).
-
+2.1 Génération de monstres immobiles
+Au lancement du jeu, le jeu ajoute diérents monstres dans l'environnement. Les
+monstres restent immobiles
 
 3. Monstres et Bestioles en tout genre
-3.1 Collision avec un monstre
-Lorsque le joueur demande au personnage de se déplacer vers une case contenant un monstre, le personnage ne se déplace pas.
+
 3.2 Fantômes
 Le labyrinthe dispose d'un nouveau type de monstre : les fantômes
 
@@ -31,4 +32,4 @@ Répartition des tâches :
 -Gabin : 1.1, 1.2, 1.4, 1.5
 -Thomas :
 -Gabriel : 1.8, 1.3
--Jules :  3.1, 3.2
+-Jules :  2.1, 3.2
