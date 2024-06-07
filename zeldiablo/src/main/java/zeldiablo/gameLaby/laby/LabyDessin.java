@@ -2,6 +2,7 @@ package zeldiablo.gameLaby.laby;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import zeldiablo.moteurJeu.*;
 
 public class LabyDessin implements DessinJeu {
@@ -13,20 +14,40 @@ public class LabyDessin implements DessinJeu {
     @Override
     public void dessinerJeu(Jeu jeu, Canvas canvas) {
         LabyJeu laby = (LabyJeu) jeu;
-        GraphicsContext gc = canvas.getGraphicsContext2D();
+        final GraphicsContext gc = canvas.getGraphicsContext2D();
         Labyrinthe labyrinthe = laby.getLabyrinthe();
 
-        double tileWidth = canvas.getWidth()/labyrinthe.elements.length;
-        double tileHeight = canvas.getHeight()/labyrinthe.elements[0].length;
+        double tileWidth = canvas.getWidth()/labyrinthe.murs.length;
+        double tileHeight = canvas.getHeight()/labyrinthe.murs[0].length;
 
-        for(Element[] row : labyrinthe.elements){
-            for(Element c : row){
-                c.afficher(gc, c.getX(), c.getY(), tileWidth, tileHeight);
+        for(int i = 0; i < labyrinthe.murs.length; i++){
+            for(int j = 0; j < labyrinthe.murs[i].length; j++){
+                if(labyrinthe.pj.getX() == i && labyrinthe.pj.getY() == j){
+                    gc.setFill(Color.RED);
+                    gc.fillOval(i*tileWidth, j*tileHeight, tileWidth, tileHeight);
+                }else if(labyrinthe.murs[i][j] instanceof Mur){ //a modifier après
+                    gc.setFill(Color.BLACK);
+                    gc.fillRect(i*tileWidth, j*tileHeight, tileWidth, tileHeight);
+                }else if (labyrinthe.murs[i][j] instanceof CaseVide){
+                    gc.setFill(Color.WHITE);
+                    gc.fillRect(i*tileWidth, j*tileHeight, tileWidth, tileHeight);
+                } else if (labyrinthe.murs[i][j] instanceof CasePiegee){
+                    gc.setFill(Color.GRAY);
+                    gc.fillRect(i*tileWidth, j*tileHeight, tileWidth, tileHeight);
+                } else if (labyrinthe.murs[i][j] instanceof CaseEffet){
+                    gc.setFill(Color.GREEN);
+                    gc.fillRect(i*tileWidth, j*tileHeight, tileWidth, tileHeight);
+                } else if (labyrinthe.murs[i][j] instanceof CaseEscalierAsc){
+                    gc.setFill(Color.DARKGRAY);
+                    gc.fillRect(i*tileWidth, j*tileHeight, tileWidth, tileHeight);
+                } else if (labyrinthe.murs[i][j] instanceof CaseEscalierDesc){
+                    gc.setFill(Color.DARKGRAY);
+                    gc.fillRect(i*tileWidth, j*tileHeight, tileWidth, tileHeight);
+                } else if(labyrinthe.f.getX() == i && labyrinthe.f.getY() == j){
+                    gc.setFill(Color.BLACK);
+                    gc.fillOval(i*tileWidth, j*tileHeight, tileWidth, tileHeight);
+                }
             }
-        }   
-        for(Entite e : labyrinthe.entites){
-            e.afficher(gc, e.getX(), e.getY(), tileWidth, tileHeight);
         }
-       
     }
 }

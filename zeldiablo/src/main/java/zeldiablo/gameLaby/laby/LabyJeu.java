@@ -9,7 +9,8 @@ import zeldiablo.moteurJeu.Clavier;
 import zeldiablo.moteurJeu.Jeu;
 
 public class LabyJeu implements Jeu {
-    private Labyrinthe labyrinthe;
+    private final Labyrinthe labyrinthe;
+
 
     public Labyrinthe getLabyrinthe() {
         return labyrinthe;
@@ -33,23 +34,14 @@ public class LabyJeu implements Jeu {
     }
 
     @Override
-    public void init(){};
+    public void init() {
+
+
+    }
 
     @Override
     public boolean etreFini() {
         return false;
     }
-    /**
-     * méthode permettant de choisir le niveau
-     * @param niveau le niveau choisi
-     * @throws IOException
-     * @throws FileNotFoundException
-     */
-    public void choisirNiveau(int niveau) throws IOException{
-        try {
-            this.labyrinthe = new Labyrinthe("zeldiablo/src/main/resources/labySimple/laby" + niveau + ".txt");
-        } catch (IOException e) {
-            this.labyrinthe = new Labyrinthe(Labyrinthe.DEFAULT_MAP);
-        }
-    }
+
 }

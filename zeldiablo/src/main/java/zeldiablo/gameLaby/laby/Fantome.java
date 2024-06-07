@@ -1,33 +1,65 @@
 package zeldiablo.gameLaby.laby;
 
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
+public  class Fantome implements Entite{
+    int pv = 10;
+    String nom = "Fantome";
+    int force = 2;
+    Arme arme = null;
+    int x, y;
 
-public  class Fantome extends Entite{
     public Fantome(int x, int y) {
-        super(x, y);
-        setNom("Fantome");
-        setPv(10);
-        setForce(2);
+
+        this.x = x;
+        this.y = y;
     }
+
+    public boolean etrePresent(int dx, int dy) {
+        return (this.x == dx && this.y == dy);
+    }
+
+    public void subirDegats(int i){
+        this.pv-=i;
+    }
+
+    public void attaquer(Entite e){
+        e.subirDegats(this.force);
+    }
+
     public void PrendreArme(Arme arme) {
 
     }
-    /**
-     * Pour le coup faut qu'on redefinisse cette méthode ensemble et qui par ailleur ira dans Entite
-     */
-    public void interagir(Labyrinthe l, Entite p) {
+
+    public String getNom() {
+        return nom;
+    }
+
+    public int getPv() {
+        return pv;
+    }
+
+    public int getForce() {
+        return force;
+    }
+
+    public Arme getArme() {
+        return arme;
+    }
+
+    public void interagir(Labyrinthe l, Perso p) {
         {
             System.out.println(""+p+" s'est fait attaquer par un Fantome !");
         }
         this.attaquer(p);
     }
-    /**
-     * à toi le reuf de définir cette méthode: c'est comment tu veux que ton entité soit affichée
-     * @param c canvas
-     */
-    public void afficher(GraphicsContext c, int i, int j, double tileWidth, double tileHeight){
-        c.setFill(Color.RED);
-        c.fillOval(i*tileWidth, j*tileHeight, tileWidth, tileHeight);
+
+    public int getX() {
+        // getter
+        return this.x;
     }
+
+    public int getY() {
+        //getter
+        return this.y;
+    }
+
 }

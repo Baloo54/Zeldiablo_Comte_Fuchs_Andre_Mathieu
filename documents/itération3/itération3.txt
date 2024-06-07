@@ -1,0 +1,26 @@
+5.1 Lorsqu'un monstre doit agir, si le monstre se trouve à coté du héros, alors il ne se
+déplace pas mais il attaque celui-ci.
+
+5.2 Lorsque le joueur appuie sur une touche donnée (par défaut la touche espace), il
+    execute une attaque contre les monstres qui se trouvent à côté de lui.
+
+5.4 Quand le joueur demande a attaquer, le héros n'attaque que devant lui et ne blesse
+    que le monstre qui se trouve dans cette direction.
+
+5.5 Lorsqu'un monstre n'a plus de points de vie, il meurt et disparait du jeu.
+
+=======-------
+
+11.1 La fenêtre n'affiche plus des figures de base (rond, ...) mais des sprites représentant
+     les personnages et les objets
+
+11.3 Plutot que de lancer directement le jeu, le joueur lance un menu qui lui permet de
+     lancer le jeu ou de quitter l'application. Ce menu ré-apparait lorsque le joueur gagne
+     ou perd.
+
+
+Répartition des tâches :
+-Gabin :
+-Thomas :
+-Gabriel :
+-Jules :

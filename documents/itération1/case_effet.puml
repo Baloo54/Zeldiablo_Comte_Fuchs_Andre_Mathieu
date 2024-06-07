@@ -1,0 +1,15 @@
+@startuml
+participant "labyrinthe : Labyrinthe" as laby
+participant "caseEffet : CaseEffet" as case
+
+activate laby
+laby -> laby : deplacerPerso(String)
+laby -> laby : GetSuivant(int, int, String)
+alt suivant instanceOf caseEffet
+laby -> case : interagir(labyrinthe, pj)
+activate case
+case --> laby
+deactivate case
+end
+deactivate laby
+@enduml
