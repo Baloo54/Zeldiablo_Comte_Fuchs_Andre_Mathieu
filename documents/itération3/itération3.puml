@@ -1,0 +1,35 @@
+@startuml checkAttaquePerso
+participant "labyrinthe : Labyrinthe" as laby
+participant "pj : Perso" as perso
+participant "monstre : Entite" as monstre
+
+activate laby
+
+laby -> laby : checkAttaquePerso()
+
+laby -> perso : getX();
+activate perso
+perso --> laby : int
+laby -> perso : getY();
+perso --> laby : int
+alt direction
+end
+
+loop entites[laby.etageCourant]
+
+    laby -> monstre : getX();
+activate monstre
+    monstre --> laby : int
+    laby -> monstre : getY();
+    monstre --> laby : int
+    alt monstre.getX() && monstre.getY()
+        laby -> perso : attaquer(monstre)
+        perso -> monstre : subirDegats(1)
+        monstre --> perso
+        deactivate monstre
+        perso --> laby
+        deactivate perso
+    end
+end
+deactivate laby
+@enduml
