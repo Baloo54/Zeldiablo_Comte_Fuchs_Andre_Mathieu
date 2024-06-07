@@ -1,0 +1,4 @@
+14
+20
+1
+zeldiablo/src/main/resources/labySimple/laby2.txt

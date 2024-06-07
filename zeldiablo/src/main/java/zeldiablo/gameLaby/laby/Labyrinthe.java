@@ -16,25 +16,9 @@ public class Labyrinthe {
     /**
      * Chemin pour le labyrinthe par défaut
      */
-     public final static String DEFAULT_MAP = "zeldiablo/src/main/resources/labySimple/laby_default";
+    public final static String DEFAULT_MAP = "zeldiablo/src/main/resources/labySimple/laby_default";
 
     public final static String DEFAULT_MAP_BUILDER = "zeldiablo/src/main/resources/labySimple/laby_default_builder.txt";
-
-    /**
-     * Constantes char
-     */
-    public static final char MUR = 'X';
-    public static final char PJ = 'P';
-    public static final char VIDE = '.';
-    public static final char PIEGE = 'T';
-    public static final char EFFET = 'E';
-
-    public static final char STR_ASC = '^';
-
-    public static final char STR_DESC = 'v';
-
-    public static final char FANTOME = 'F';
-
     /**
      * constantes actions possibles
      */
@@ -44,18 +28,16 @@ public class Labyrinthe {
     public static final String DROITE = "Droite";
 
     /**
-     * attribut du personnage
+     * tableau d'entites
      */
-    public Perso pj;
-
-    public Fantome f;
+    public ArrayList<Entite> entites = new ArrayList<Entite>();
 
     /**
      * les murs du labyrinthe
      */
-    public Case[][] murs;
+    public Element[][] elements;
 
-    public Case[][][] etages;
+    public Element[][][] etages;
 
     public int nbEtages;
 
@@ -104,8 +86,6 @@ public class Labyrinthe {
     public Labyrinthe(String nom) throws IOException {
         // ouvrir fichier
         FileReader fichier;
-
-
         try{
             fichier = new FileReader(nom);
         } catch (FileNotFoundException e){
@@ -123,82 +103,31 @@ public class Labyrinthe {
         //lecture nombre d'étages
         this.nbEtages = Integer.parseInt(bfRead.readLine());
 
-        this.etages = new Case[nbEtages][nbColonnes][nbLignes];
+        this.etages = new Element[nbEtages][nbColonnes][nbLignes];
         // creation labyrinthe vide
-        this.murs = new Case[nbColonnes][nbLignes];
-        this.pj = null;
+        this.elements = new Element[nbColonnes][nbLignes];
 
-        for(int i = 0; i < nbEtages; i++) {
-
-            FileReader fichierMap;
-
-            String etage = bfRead.readLine();
-
-            System.out.println(etage);
-
-            try{
-                fichierMap = new FileReader(etage);
-            } catch (FileNotFoundException e){
-                fichierMap = new FileReader(DEFAULT_MAP);
-            }
-            BufferedReader bfReadMap = new BufferedReader(fichierMap);
-
-            // lecture des cases
-            String ligne = bfReadMap.readLine();
-            System.out.println(ligne);
-            // stocke les indices courants
-            int numeroLigne = 0;
-
-            // parcours le fichier
-            while (ligne != null) {
-
-                // parcours de la ligne
+        // lecture des cases
+        String ligne = bfRead.readLine();
+        // stocke les indices courants
+        int numeroLigne = 0;
+        // parcours le fichier
+        while (ligne != null) {
+            // parcours de la ligne
+            try {
                 for (int colonne = 0; colonne < ligne.length(); colonne++) {
-
-                    char c = ligne.charAt(colonne);
-                    System.out.println(ligne + " : "+c);
-                    switch (c) {
-                        case MUR:
-                            this.etages[i][colonne][numeroLigne] = new Mur();
-                            break;
-                        case VIDE:
-                            this.etages[i][colonne][numeroLigne] = new CaseVide();
-                            break;
-                        case PIEGE:
-                            this.etages[i][colonne][numeroLigne] = new CasePiegee();
-                            break;
-                        case EFFET:
-                            this.etages[i][colonne][numeroLigne] = new CaseEffet();
-                            break;
-                        case STR_ASC:
-                            this.etages[i][colonne][numeroLigne] = new CaseEscalierAsc();
-                            break;
-                        case STR_DESC:
-                            this.etages[i][colonne][numeroLigne] = new CaseEscalierDesc();
-                            break;
-                        case FANTOME:
-                            this.murs[colonne][numeroLigne] = new CaseVide();
-                            this.f = new Fantome(colonne, numeroLigne);
-                            break;
-                        case PJ:
-                            // pas de mur
-                            this.etages[i][colonne][numeroLigne] = new CaseVide();
-                            // ajoute PJ
-                            this.pj = new Perso(colonne, numeroLigne);
-                            this.murs = this.etages[i];
-                            this.etageCourant = i;
-                            break;
-
-                        default:
-                            throw new Error("caractere inconnu " + c);
-                    }
+                    // conversion de la case en objet Case
+                    Class<?> clazz = Class.forName("zeldiablo.gameLaby.laby." + ligne.charAt(colonne));
+                    Element e = (Element)clazz.getConstructor(int.class, int.class).newInstance(colonne, numeroLigne);
+                    // stockage
+                    e.stocker(this);
                 }
-
-                // lecture
-                ligne = bfReadMap.readLine();
-                numeroLigne++;
+            }catch (Exception e) {
+                throw new Error("Erreur lors de la lecture du labyrinthe : " + e.getMessage());
             }
-
+            // lecture
+            ligne = bfRead.readLine();
+            numeroLigne++;
         }
 
         // ferme fichier
@@ -213,25 +142,12 @@ public class Labyrinthe {
      * @param action une des actions possibles
      */
     public void deplacerPerso(String action) {
-
-        int[] courante = {this.pj.getX(), this.pj.getY()};
-
+        // case courante
+        int[] courante = {entites.get(0).getX(), entites.get(0).getY()};
+        // calcule case suivante
         int[] suivante = getSuivant(courante[0], courante[1], action);
-
-        if (!(this.murs[suivante[0]][suivante[1]] instanceof Mur)) {
-            boolean caseLibre = true;
-
-            if ((this.pj.getX() == suivante[0] && this.pj.getY() == suivante[1]) ||
-                    (this.f != null && this.f.getX() == suivante[0] && this.f.getY() == suivante[1])) {
-                caseLibre = false;
-            }
-
-            if (caseLibre) {
-                this.pj.x = suivante[0];
-                this.pj.y = suivante[1];
-                this.murs[suivante[0]][suivante[1]].interagir(this, this.pj);
-            }
-        }
+        //interagir avec la case suivante
+        ((Case) this.elements[suivante[0]][suivante[1]]).interagir(this, this.entites.get(0));
     }
 
 
@@ -254,7 +170,7 @@ public class Labyrinthe {
      * @return
      */
     public int getLengthY() {
-        return murs[0].length;
+        return elements[0].length;
     }
 
     /**
@@ -263,7 +179,7 @@ public class Labyrinthe {
      * @return
      */
     public int getLength() {
-        return murs.length;
+        return elements.length;
     }
 
     /**
@@ -272,12 +188,8 @@ public class Labyrinthe {
      * @param y
      * @return
      */
-    public Case getMur(int x, int y) {
+    public Element getElement(int x, int y) {
         // utilise le tableau de boolean
-        return this.murs[x][y];
-    }
-
-    public Perso getPj() {
-        return this.pj;
+        return this.elements[x][y];
     }
 }
