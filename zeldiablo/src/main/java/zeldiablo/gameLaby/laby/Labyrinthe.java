@@ -49,7 +49,8 @@ public class Labyrinthe {
      * attribut du personnage
      */
     public static Perso pj;
-    //public static int directionPerso = 0; // 0 : gauche; 1 : haut; 2 : droite; 3 : bas;
+
+    public int deplacementPersoCooldown = 2;
 
     ArrayList<ArrayList<Entite>> entites = new ArrayList<>(); //liste des entités pour chaque étage
 
@@ -260,7 +261,7 @@ public class Labyrinthe {
         for(int i = 0; i < this.entites.get(this.etageCourant).size(); i++){
             Entite e = this.entites.get(this.etageCourant).get(i);
             if(e.getX() == target[0] && e.getY() == target[1]){
-                System.out.println("heyya !");
+                System.out.println("attaque de" + e);
                 pj.attaquer(e);
 
             }
