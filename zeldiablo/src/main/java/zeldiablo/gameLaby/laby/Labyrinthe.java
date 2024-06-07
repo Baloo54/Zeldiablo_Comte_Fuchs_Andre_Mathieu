@@ -48,7 +48,7 @@ public class Labyrinthe {
      */
     public Perso pj;
 
-    public Fantome f;
+    ArrayList<ArrayList<Entite>> entites = new ArrayList<>(); //liste des entités pour chaque étage
 
     /**
      * les murs du labyrinthe
@@ -130,6 +130,8 @@ public class Labyrinthe {
 
         for(int i = 0; i < nbEtages; i++) {
 
+            entites.add(new ArrayList<>());
+
             FileReader fichierMap;
 
             String etage = bfRead.readLine();
@@ -178,7 +180,7 @@ public class Labyrinthe {
                             break;
                         case FANTOME:
                             this.murs[colonne][numeroLigne] = new CaseVide();
-                            this.f = new Fantome(colonne, numeroLigne);
+                            entites.get(i).add(new Fantome(colonne, numeroLigne));
                             break;
                         case PJ:
                             // pas de mur
