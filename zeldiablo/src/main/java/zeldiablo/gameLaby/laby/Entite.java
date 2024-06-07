@@ -18,4 +18,5 @@ public interface Entite {
     int getX();
 
     int getY();
+
 }

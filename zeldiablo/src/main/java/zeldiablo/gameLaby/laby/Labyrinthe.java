@@ -49,7 +49,7 @@ public class Labyrinthe {
      * attribut du personnage
      */
     public static Perso pj;
-    public static int directionPerso = 0; // 0 : gauche; 1 : haut; 2 : droite; 3 : bas;
+    //public static int directionPerso = 0; // 0 : gauche; 1 : haut; 2 : droite; 3 : bas;
 
     ArrayList<ArrayList<Entite>> entites = new ArrayList<>(); //liste des entités pour chaque étage
 
@@ -165,7 +165,6 @@ public class Labyrinthe {
                 for (int colonne = 0; colonne < ligne.length(); colonne++) {
 
                     char c = ligne.charAt(colonne);
-                    System.out.println(ligne + " : "+c);
                     switch (c) {
                         case MUR:
                             this.etages[i][colonne][numeroLigne] = new Mur();

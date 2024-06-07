@@ -1,7 +1,7 @@
 10
-12
+10
 4
-zeldiablo/src/main/resources/labySimple/le0.txt
+zeldiablo/src/main/resources/labySimple/lev0.txt
 zeldiablo/src/main/resources/labySimple/lev1.txt
 zeldiablo/src/main/resources/labySimple/lev2.txt
 zeldiablo/src/main/resources/labySimple/lev3.txt
