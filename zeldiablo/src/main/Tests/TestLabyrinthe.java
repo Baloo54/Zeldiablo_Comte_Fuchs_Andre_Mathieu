@@ -1,57 +1,97 @@
 /*
 import org.junit.jupiter.api.Test;
-import zeldiablo.gameLaby.laby.CaseEffet;
-import zeldiablo.gameLaby.laby.CasePiegee;
-import zeldiablo.gameLaby.laby.Labyrinthe;
+import zeldiablo.gameLaby.laby.*;
 import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-class TestLabyrinthe {
+public class TestLabyrinthe {
 
+
+    //Teste si le labyrinthe se charge
     @Test
-    void testCollisionAvecMurs() throws IOException {
-        Labyrinthe labyrinthe = new Labyrinthe("zeldiablo/src/main/resources/labySimple/laby2.txt");
-        int initX = labyrinthe.getPj().getX();
-        int initY = labyrinthe.getPj().getY();
-
-            labyrinthe.deplacerPerso(Labyrinthe.DROITE);
-
-        assertEquals(initX, labyrinthe.getPj().getX());
-        assertEquals(initY, labyrinthe.getPj().getY());
+    void testChargerLabyrinthe() throws IOException
+    {
+        Labyrinthe labyrinthe = new Labyrinthe("zeldiablo/src/main/resources/labySimple/lev0.txt");
+        assertNotNull(labyrinthe);
     }
 
-
+    //Teste si une exception est bien levee quand un fichier labyrinthe n'existe pas
     @Test
-    void testDeplacerPerso() throws IOException {
-        Labyrinthe labyrinthe = new Labyrinthe("zeldiablo/src/main/resources/labySimple/laby2.txt");
+    void testLabyrintheFichierInexistant()
+    {
+        assertThrows(Error.class, () -> {
+            new Labyrinthe("zeldiablo/src/main/resources/labySimple/cuicui.txt");
+        });
+    }
 
-        assertEquals(17, labyrinthe.getPj().getX());
-        assertEquals(12, labyrinthe.getPj().getY());
+    //Teste de déplacement et de collisions avec les murs
+    @Test
+    void testDeplacementPerso() throws IOException
+    {
+        Labyrinthe labyrinthe = new Labyrinthe("zeldiablo/src/main/resources/labySimple/lev0.txt");
+        Entite entite = labyrinthe.entites.get(0);
+        int initX = entite.getX();
+        int initY = entite.getY();
+
+        //Censé ne pas bouger, case mur au-dessus, pour le laby testé
+        labyrinthe.deplacerPerso(Labyrinthe.HAUT);
+        assertEquals(initY, entite.getY());
+        assertEquals(initX, entite.getX());
+
+        labyrinthe.deplacerPerso(Labyrinthe.BAS);
+        assertEquals(initX, entite.getX());
+        assertEquals(initY+1, entite.getY());
+
 
         labyrinthe.deplacerPerso(Labyrinthe.GAUCHE);
-        assertEquals(16, labyrinthe.getPj().getX());
-        assertEquals(12, labyrinthe.getPj().getY());
-
-        labyrinthe.deplacerPerso(Labyrinthe.HAUT);
-        assertEquals(16, labyrinthe.getPj().getX());
-        assertEquals(11, labyrinthe.getPj().getY());
-    }
-
-    @Test
-    void testEtreFini() throws IOException {
-        Labyrinthe labyrinthe = new Labyrinthe("zeldiablo/src/main/resources/labySimple/laby2.txt");
-        assertFalse(labyrinthe.etreFini());
-    }
-
-    @Test
-
-    void testSpecialCase() throws IOException {
-        Labyrinthe labyrinthe = new Labyrinthe("zeldiablo/src/main/resources/labySimple/labyTest.txt");
+        assertEquals(initX-1, entite.getX());
+        assertEquals(initY+1, entite.getY());
 
         labyrinthe.deplacerPerso(Labyrinthe.DROITE);
-        assertInstanceOf(CasePiegee.class, labyrinthe.murs[labyrinthe.getPj().getX()][labyrinthe.getPj().getY()]);
-        labyrinthe.deplacerPerso(Labyrinthe.BAS);
-        assertInstanceOf(CaseEffet.class, labyrinthe.murs[labyrinthe.getPj().getX()][labyrinthe.getPj().getY()]);
+        assertEquals(initX, entite.getX());
+        assertEquals(initY+1, entite.getY());
+
     }
-}*/
+
+    //Teste si le nombre d'etage est lu correctement
+    @Test
+    void testInitialisationNbEtages() throws IOException {
+        Labyrinthe labyrinthe = new Labyrinthe("zeldiablo/src/main/resources/labySimple/lev0.txt");
+        assertEquals(1, labyrinthe.nbEtages);
+    }
+
+    //Teste si les getteurs retournent bien la taille du labyrinthe
+    @Test
+    void testGetLengthAndLengthY() throws IOException {
+        Labyrinthe labyrinthe = new Labyrinthe("zeldiablo/src/main/resources/labySimple/lev0.txt");
+        assertEquals(10, labyrinthe.getLength());
+        assertEquals(10, labyrinthe.getLengthY());
+    }
+
+    //Teste si un element se trouve bien aux coordonnées indiquées
+    @Test
+    void testGetElement() throws IOException {
+        Labyrinthe labyrinthe = new Labyrinthe("zeldiablo/src/main/resources/labySimple/lev0.txt");
+        Element element = labyrinthe.getElement(0, 0);
+        assertNotNull(element);
+    }
+
+    //Teste une action invalide
+    @Test
+    void testDeplacerPersoInvalidAction() throws IOException {
+        Labyrinthe labyrinthe = new Labyrinthe("zeldiablo/src/main/resources/labySimple/lev0.txt");
+        Entite entite = labyrinthe.entites.get(0);
+        int initX = entite.getX();
+        int initY = entite.getY();
+
+        assertThrows(Error.class, () -> {
+            labyrinthe.deplacerPerso("INVALID_ACTION");
+        });
+    }
+
+    //TODO TESTER SI LE JEU SE FINI BIEN
+
+}
+
+ */

@@ -1,22 +1,27 @@
-/*import org.junit.jupiter.api.Test;
-import zeldiablo.gameLaby.laby.Fantome;
+/*
+import org.junit.jupiter.api.Test;
+import zeldiablo.gameLaby.laby.Entite;
+import zeldiablo.gameLaby.laby.F;
+import zeldiablo.gameLaby.laby.Labyrinthe;
+
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestEntite {
+public class TestEntite
+{
 
+    //Test si entitee est au bon emplacement
     @Test
-    public void testFantome() {
-        Fantome f = new Fantome("Fantome", 3, 1, 0, 0);
-        assertEquals(f.getNom(), "Fantome");
-        assertEquals(f.getPv(), 3);
-        assertEquals(f.getForce(), 1);
-        assertEquals(f.getArme(), null);
-        assertEquals(f.etrePresent(0, 0), true);
-        assertEquals(f.etrePresent(1, 1), false);
-
-        Fantome f2 = new Fantome("Fantome", 3, 1, 0, 0);
-        f.attaquer(f2);
-        assertEquals(f2.getPv(), 2);
-
+    void testInitialisationCoordonnees() throws IOException
+    {
+        Labyrinthe labyrinthe = new Labyrinthe("zeldiablo/src/main/resources/labySimple/laby1.txt");
+        Entite monstre = labyrinthe.entites.get(0);
+        assertEquals(5, monstre.getX());
+        assertEquals(5, monstre.getY());
     }
-}*/
+
+    
+}
+
+ */
