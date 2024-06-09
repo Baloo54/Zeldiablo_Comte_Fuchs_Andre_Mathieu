@@ -8,7 +8,7 @@ public  class F extends Entite{
         setNom("Fantome");
         setPv(10);
         setForce(2);
-        setColor(Color.RED);
+        setColor(Color.LIGHTSKYBLUE);
     }
     public void PrendreArme(Arme arme) {
 
