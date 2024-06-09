@@ -16,7 +16,6 @@ public class Labyrinthe {
      * Chemin pour le labyrinthe par défaut
      */
     public final static String DEFAULT_MAP = "zeldiablo/src/main/resources/labySimple/laby_default";
-    public final static String DEFAULT_MAP_BUILDER = "zeldiablo/src/main/resources/labySimple/laby_default_builder.txt";
     /**
      * constantes actions possibles
      */
@@ -82,7 +81,7 @@ public class Labyrinthe {
         try{
             fichier = new FileReader(nom);
         } catch (FileNotFoundException e){
-            fichier = new FileReader(DEFAULT_MAP_BUILDER);
+            fichier = new FileReader(DEFAULT_MAP);
         }
         BufferedReader bfRead = new BufferedReader(fichier);
         // lecture nblignes
