@@ -38,9 +38,7 @@ public class Clavier {
             case D:
                 this.droite = true;
                 break;
-
         }
-
     }
 
     /**

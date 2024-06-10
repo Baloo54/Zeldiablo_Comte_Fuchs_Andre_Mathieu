@@ -11,6 +11,8 @@ public class X extends Case{
      * interagir avec la case
      */
     public void interagir(Labyrinthe l, Entite e){
-        //rien
+        if(e instanceof F){
+            e.setPos(this.getX(), this.getY());
+        }
     }
 }

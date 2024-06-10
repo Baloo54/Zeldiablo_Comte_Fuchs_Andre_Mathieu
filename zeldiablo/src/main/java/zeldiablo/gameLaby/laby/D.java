@@ -15,5 +15,6 @@ public class D extends Case{
     public void interagir(Labyrinthe l, Entite p){
         //si c'est un personnage car on ne veut pas que les monstres puissent changer les étages du labyrinthe
         if(p instanceof P){l.setEtagesPerso(l.getEtagesPerso()-1);}
+        p.setPos(this.getX(), this.getY());
     }
 }
