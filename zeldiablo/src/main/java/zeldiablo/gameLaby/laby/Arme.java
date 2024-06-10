@@ -6,8 +6,8 @@ package zeldiablo.gameLaby.laby;
 public class Arme {
 
     // attributs de l'arme
-    String nom;
-    int degats;
+    private String nom;
+    private int degats;
 
     // constructeur
     public Arme(String nom, int degats) {

@@ -51,8 +51,9 @@ public abstract class Entite extends Element{
      * à définir poto jsuis pas devin
      * @param arme
      */
-    public void PrendreArme(Arme arme) {
-
+    public void PrendreArme(Arme arme)
+    {
+        this.arme=arme;
     }
     /**
      * getter force

@@ -168,6 +168,20 @@ public class Labyrinthe {
         }
         return res;
     }
+
+    public boolean verifierProximiteJoueur(P joueur,F fantonme)
+    {
+        int distance = Math.abs(joueur.getX() - fantonme.getX()) + Math.abs(joueur.getY() - fantonme.getY());
+        if(distance <= 1)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+
+
     /**
      * return entite
      * @return ArrayList<Entite>
