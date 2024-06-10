@@ -111,3 +111,229 @@ deactivate dessin
 
 @enduml
 
+@startuml diagclasseV1
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class Arme {
+  + Arme(String, int):
+  ~ nom: String
+  ~ degats: int
+  + getNom(): String
+  + getDegats(): int
+}
+interface Case << interface >> {
+  + interagir(Labyrinthe, Entite): void
+}
+class CaseEffet {
+  + CaseEffet():
+  + interagir(Labyrinthe, Entite): void
+}
+class CaseEscalierAsc {
+  + CaseEscalierAsc():
+  + interagir(Labyrinthe, Entite): void
+}
+class CaseEscalierDesc {
+  + CaseEscalierDesc():
+  + interagir(Labyrinthe, Entite): void
+}
+class CasePiegee {
+  + CasePiegee():
+  + interagir(Labyrinthe, Entite): void
+}
+class CaseVide {
+  + CaseVide():
+  + interagir(Labyrinthe, Entite): void
+}
+class Clavier {
+  + Clavier():
+  + bas: boolean
+  + gauche: boolean
+  + droite: boolean
+  + haut: boolean
+  + relacherTouche(KeyEvent): void
+  + appuyerTouche(KeyEvent): void
+}
+interface DessinJeu << interface >> {
+  + dessinerJeu(Jeu, Canvas): void
+}
+interface Entite << interface >> {
+  + getPv(): int
+  + getY(): int
+  + PrendreArme(Arme): void
+  + getForce(): int
+  + setY(int): void
+  + attaquer(Entite): void
+  + getArme(): Arme
+  + setX(int): void
+  + subirDegats(int): void
+  + getNom(): String
+  + getX(): int
+  + etrePresent(int, int): boolean
+}
+class Fantome {
+  + Fantome(int, int):
+  ~ nom: String
+  ~ arme: Arme
+  ~ x: int
+  ~ y: int
+  ~ pv: int
+  ~ force: int
+  + getPv(): int
+  + PrendreArme(Arme): void
+  + setX(int): void
+  + getX(): int
+  + interagir(Labyrinthe, Perso): void
+  + getNom(): String
+  + getForce(): int
+  + etrePresent(int, int): boolean
+  + attaquer(Entite): void
+  + setY(int): void
+  + subirDegats(int): void
+  + getArme(): Arme
+  + getY(): int
+}
+class FrameStats {
+  + FrameStats():
+  - meanFrameInterval: double
+  - text: ReadOnlyStringWrapper
+  - frameCount: long
+  + getMeanFrameInterval(): double
+  + getText(): String
+  + textProperty(): ReadOnlyStringProperty
+  + getFrameCount(): long
+  + addFrame(long): void
+  + toString(): String
+}
+interface Jeu << interface >> {
+  + etreFini(): boolean
+  + update(double, Clavier): void
+  + init(): void
+}
+class LabyDessin {
+  + LabyDessin():
+  + dessinerJeu(Jeu, Canvas): void
+}
+class LabyJeu {
+  + LabyJeu():
+  - labyrinthe: Labyrinthe
+  + etreFini(): boolean
+  + getLabyrinthe(): Labyrinthe
+  + update(double, Clavier): void
+  + init(): void
+}
+class Labyrinthe {
+  + Labyrinthe(String):
+  + DEFAULT_MAP_BUILDER: String
+  + MUR: char
+  + VIDE: char
+  ~ entites: ArrayList<ArrayList<Entite>>
+  + PIEGE: char
+  + GAUCHE: String
+  + STR_DESC: char
+  + FANTOME: char
+  + HAUT: String
+  + DEFAULT_MAP: String
+  + BAS: String
+  + DROITE: String
+  + etages: Case[][][]
+  + PJ: char
+  + EFFET: char
+  - timer: Timer
+  + STR_ASC: char
+  + murs: Case[][]
+  + nbEtages: int
+  + etageCourant: int
+  + pj: Perso
+  + deplacerPerso(String): void
+  + getLength(): int
+  + deplacerMonstre(): void
+  + getMur(int, int): Case
+  ~ getSuivant(int, int, String): int[]
+  + getLengthY(): int
+  + getPj(): Perso
+  + etreFini(): boolean
+}
+class MainLaby {
+  + MainLaby():
+  + main(String[]): void
+}
+class MoteurJeu {
+  + MoteurJeu():
+  - HEIGHT: double
+  - jeu: Jeu
+  - dureeFPS: double
+  - WIDTH: double
+  - FPS: double
+  - frameStats: FrameStats
+  ~ controle: Clavier
+  - dessin: DessinJeu
+  + launch(Jeu, DessinJeu): void
+  - startAnimation(Canvas): void
+  + setTaille(double, double): void
+  + start(Stage): void
+  + setFPS(int): void
+}
+class Mur {
+  + Mur():
+  + interagir(Labyrinthe, Entite): void
+}
+class Perso {
+  + Perso(int, int):
+  ~ arme: Arme
+  ~ pv: int
+  ~ force: int
+  ~ y: int
+  ~ nom: String
+  ~ x: int
+  + getArme(): Arme
+  + subirDegats(int): void
+  + setY(int): void
+  + attaquer(Entite): void
+  + PrendreArme(Arme): void
+  + getPv(): int
+  + setX(int): void
+  + getForce(): int
+  + etrePresent(int, int): boolean
+  + getX(): int
+  + getNom(): String
+  + getY(): int
+}
+
+CaseEffet         -[#008200,dashed]-^  Case
+CaseEscalierAsc   -[#008200,dashed]-^  Case
+CaseEscalierDesc  -[#008200,dashed]-^  Case
+CasePiegee        -[#008200,dashed]-^  Case
+CaseVide          -[#008200,dashed]-^  Case
+Fantome          "1" *-[#595959,plain]-> "arme\n1" Arme
+Fantome           -[#008200,dashed]-^  Entite
+LabyDessin        -[#008200,dashed]-^  DessinJeu
+LabyJeu           -[#008200,dashed]-^  Jeu
+LabyJeu          "1" *-[#595959,plain]-> "labyrinthe\n1" Labyrinthe
+LabyJeu           -[#595959,dashed]->  Labyrinthe       : "«create»"
+Labyrinthe       "1" *-[#595959,plain]-> "murs\n*" Case
+Labyrinthe        -[#595959,dashed]->  Case             : "«create»"
+Labyrinthe        -[#595959,dashed]->  CaseEffet        : "«create»"
+Labyrinthe        -[#595959,dashed]->  CaseEscalierAsc  : "«create»"
+Labyrinthe        -[#595959,dashed]->  CaseEscalierDesc : "«create»"
+Labyrinthe        -[#595959,dashed]->  CasePiegee       : "«create»"
+Labyrinthe        -[#595959,dashed]->  CaseVide         : "«create»"
+Labyrinthe        -[#595959,dashed]->  Fantome          : "«create»"
+Labyrinthe        -[#595959,dashed]->  Mur              : "«create»"
+Labyrinthe       "1" *-[#595959,plain]-> "pj\n1" Perso
+Labyrinthe        -[#595959,dashed]->  Perso            : "«create»"
+MainLaby          -[#595959,dashed]->  LabyDessin       : "«create»"
+MainLaby          -[#595959,dashed]->  LabyJeu          : "«create»"
+MoteurJeu        "1" *-[#595959,plain]-> "controle\n1" Clavier
+MoteurJeu         -[#595959,dashed]->  Clavier          : "«create»"
+MoteurJeu        "1" *-[#595959,plain]-> "dessin\n1" DessinJeu
+MoteurJeu        "1" *-[#595959,plain]-> "frameStats\n1" FrameStats
+MoteurJeu         -[#595959,dashed]->  FrameStats       : "«create»"
+MoteurJeu        "1" *-[#595959,plain]-> "jeu\n1" Jeu
+Mur               -[#008200,dashed]-^  Case
+Perso            "1" *-[#595959,plain]-> "arme\n1" Arme
+Perso             -[#008200,dashed]-^  Entite
+@enduml
+
+
