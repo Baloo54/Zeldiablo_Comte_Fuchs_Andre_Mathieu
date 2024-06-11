@@ -1,5 +1,10 @@
 package zeldiablo.gameLaby.laby.elements;
 
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+
+import java.io.FileInputStream;
+
 /**
  * Case Glaive
  * @autor Gabriel Comte, Thomas Fuchs, Jules Andre, Gabin Mattieu
@@ -7,6 +12,13 @@ package zeldiablo.gameLaby.laby.elements;
  */
 public class Case_Glaive extends Case_Arme
 {
+    private String IMGPATH = "zeldiablo/src/main/resources/textures/glaive.png";
+    private Image IMG = new Image( new FileInputStream(this.IMGPATH));
+
+    public void afficher(GraphicsContext c, double tileWidth, double tileHeight){
+        c.drawImage(IMG ,getX()*tileWidth, getY()*tileHeight, tileWidth, tileHeight);
+    };
+
     /**
      * super constructeur
      *
