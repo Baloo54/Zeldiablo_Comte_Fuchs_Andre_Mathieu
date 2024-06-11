@@ -67,7 +67,8 @@ public class Secret extends Case{
             int x = murs.get(i).getX(), y = murs.get(i).getY();
             try {
                 mur = new Mur(x, y);
-                passageSecret = new Case_Vide(x, y);
+                Case[] caseAleatoire = {new Case_Effet(x, y), new Case_Hellbarde(x, y), new Case_Victoire(x, y), new Case_Glaive(x, y), new Case_Massue(x, y)};
+                passageSecret = caseAleatoire[(int)(Math.random()*caseAleatoire.length)];
             } catch (Exception e) {
                 e.printStackTrace();
             }

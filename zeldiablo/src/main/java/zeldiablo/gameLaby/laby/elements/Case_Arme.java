@@ -43,7 +43,7 @@ public class Case_Arme extends Case
             {
                 ex.printStackTrace();
             }
-        }
+        }e.setPos(getX(), getY());
     }
 
     public void setArme(Arme a)
