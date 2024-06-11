@@ -1,6 +1,10 @@
 package zeldiablo.gameLaby.laby.elements;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
+
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import zeldiablo.gameLaby.laby.Case;
 import zeldiablo.gameLaby.laby.Entite;
@@ -13,6 +17,14 @@ import zeldiablo.gameLaby.laby.Labyrinthe;
  * 
  */
 public class Secret extends Case{
+
+    private String IMGPATH = "zeldiablo/src/main/resources/textures/button.png";
+    private Image IMG = new Image( new FileInputStream(this.IMGPATH));
+
+    public void afficher(GraphicsContext c, double tileWidth, double tileHeight){
+        c.drawImage(IMG ,getX()*tileWidth, getY()*tileHeight, tileWidth, tileHeight);
+    };
+
     /**
      * attribut postition du passage secret 
      *

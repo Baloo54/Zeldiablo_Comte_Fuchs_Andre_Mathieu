@@ -17,7 +17,7 @@ public abstract class Entite extends Element{
      * @param dx position selon x
      * @param dy position selon y
      */
-    public Entite(int dx, int dy){
+    public Entite(int dx, int dy) throws Exception{
         super(dx, dy);   
     }
     public void subirDegats(int i){
@@ -89,10 +89,10 @@ public abstract class Entite extends Element{
      * @param tileWidth largeur de la case
      * @param tileHeight hauteur de la case
      */
-    public void afficher(GraphicsContext c, double tileWidth, double tileHeight){
+    /*public void afficher(GraphicsContext c, double tileWidth, double tileHeight){
         c.setFill(getColor());
         c.fillOval(getX()*tileWidth, getY()*tileHeight, tileWidth, tileHeight);
-    }
+    }*/
     /**
      * getter direction
      * @return direction

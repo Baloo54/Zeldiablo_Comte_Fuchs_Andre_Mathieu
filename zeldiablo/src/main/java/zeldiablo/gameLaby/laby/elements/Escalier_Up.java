@@ -1,9 +1,13 @@
 package zeldiablo.gameLaby.laby.elements;
 
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import zeldiablo.gameLaby.laby.Case;
 import zeldiablo.gameLaby.laby.Entite;
 import zeldiablo.gameLaby.laby.Labyrinthe;
+
+import java.io.FileInputStream;
 
 /**
  * Case vide
@@ -12,6 +16,14 @@ import zeldiablo.gameLaby.laby.Labyrinthe;
  * 
  */
 public class Escalier_Up extends Case{
+
+    private String IMGPATH = "zeldiablo/src/main/resources/textures/stairs_upward.png";
+    private Image IMG = new Image( new FileInputStream(this.IMGPATH));
+
+    public void afficher(GraphicsContext c, double tileWidth, double tileHeight){
+        c.drawImage(IMG ,getX()*tileWidth, getY()*tileHeight, tileWidth, tileHeight);
+    };
+
     /**
      * super constructeur
      * @param dx

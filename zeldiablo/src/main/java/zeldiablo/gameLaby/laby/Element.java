@@ -1,11 +1,9 @@
 package zeldiablo.gameLaby.laby;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
+
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 /**
@@ -14,6 +12,9 @@ import javafx.scene.paint.Color;
  * @version 3.0
  */
 public abstract class Element {
+
+    private String IMGPATH; // = "zeldiablo/src/main/resources/textures/slab.png";
+    private Image IMG;
   /**
    * attributs position
    * couleur
@@ -28,7 +29,7 @@ public abstract class Element {
    * @param dy position selon y
    * @param Color couleur
    */
-  public Element(int dx, int dy){
+  public Element(int dx, int dy) throws Exception{
       this.x = dx;
       this.y = dy;
   }
@@ -36,7 +37,9 @@ public abstract class Element {
      * méthode afficher l'entite
      * @param canvas
      */
-    public abstract void afficher(GraphicsContext c, double tileWidth, double tileHeight);
+  public void afficher(GraphicsContext c, double tileWidth, double tileHeight){
+      c.drawImage(IMG ,getX()*tileWidth, getY()*tileHeight, tileWidth, tileHeight);
+  };
   /**
    *  abstract méthode stocker 
    * permet de stocket l'element dans le labyrinthe

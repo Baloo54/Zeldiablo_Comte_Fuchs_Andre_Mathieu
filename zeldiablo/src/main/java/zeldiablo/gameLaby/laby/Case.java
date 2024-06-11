@@ -14,7 +14,7 @@ public abstract class Case extends Element {
      * @param dy position selon y
      * 
      */
-    public Case(int dx, int dy){
+    public Case(int dx, int dy) throws Exception{
         super(dx, dy);
     }
     /**

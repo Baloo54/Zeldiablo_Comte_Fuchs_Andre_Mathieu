@@ -13,7 +13,7 @@ public class Case_Massue extends Case_Arme
      * @param dx
      * @param dy
      */
-    public Case_Massue(int dx, int dy) {
+    public Case_Massue(int dx, int dy) throws Exception{
         super(dx, dy);
         setArme(new Massue());
     }

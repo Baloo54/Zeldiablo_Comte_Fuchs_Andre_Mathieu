@@ -13,7 +13,7 @@ public class Case_Glaive extends Case_Arme
      * @param dx
      * @param dy
      */
-    public Case_Glaive(int dx, int dy)
+    public Case_Glaive(int dx, int dy) throws Exception
     {
         super(dx, dy);
         setArme(new Glaive());

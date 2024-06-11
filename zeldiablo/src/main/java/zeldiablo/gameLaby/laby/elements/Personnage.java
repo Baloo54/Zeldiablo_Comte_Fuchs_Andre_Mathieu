@@ -1,8 +1,12 @@
 package zeldiablo.gameLaby.laby.elements;
 
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import zeldiablo.gameLaby.laby.Entite;
 import zeldiablo.gameLaby.laby.Labyrinthe;
+
+import java.io.FileInputStream;
 
 /**
  * Personnage
@@ -10,6 +14,14 @@ import zeldiablo.gameLaby.laby.Labyrinthe;
  * @version 3.0
  */
 public class Personnage extends Entite{
+
+    private String IMGPATH = "zeldiablo/src/main/resources/textures/hero_sideway.png";
+    private Image IMG = new Image( new FileInputStream(this.IMGPATH));
+
+    public void afficher(GraphicsContext c, double tileWidth, double tileHeight){
+        c.drawImage(IMG ,getX()*tileWidth, getY()*tileHeight-0.5*tileHeight, tileWidth, tileHeight);
+    };
+
     // super constructeur
     public Personnage(int dx, int dy) throws Exception{
         super(dx, dy);

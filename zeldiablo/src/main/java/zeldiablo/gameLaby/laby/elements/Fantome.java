@@ -1,9 +1,13 @@
 package zeldiablo.gameLaby.laby.elements;
 
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import zeldiablo.gameLaby.laby.Arme;
 import zeldiablo.gameLaby.laby.Entite;
 import zeldiablo.gameLaby.laby.Labyrinthe;
+
+import java.io.FileInputStream;
 
 /**
  * Fantome
@@ -12,6 +16,13 @@ import zeldiablo.gameLaby.laby.Labyrinthe;
  * 
  */
 public  class Fantome extends Entite{
+
+    private String IMGPATH = "zeldiablo/src/main/resources/textures/ghost.png";
+    private Image IMG = new Image( new FileInputStream(this.IMGPATH));
+
+    public void afficher(GraphicsContext c, double tileWidth, double tileHeight){
+        c.drawImage(IMG ,getX()*tileWidth, getY()*tileHeight, tileWidth, tileHeight);
+    };
     public Fantome(int x, int y) throws Exception{
         super(x, y);
         setNom("Fantome");

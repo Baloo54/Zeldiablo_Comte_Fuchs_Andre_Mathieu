@@ -14,7 +14,7 @@ public class Case_Hellbarde extends Case_Arme
      * @param dx
      * @param dy
      */
-    public Case_Hellbarde(int dx,int dy)
+    public Case_Hellbarde(int dx,int dy) throws Exception
     {
         super(dx,dy);
         setArme(new Hellbarde());

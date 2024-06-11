@@ -20,7 +20,7 @@ public class Case_Arme extends Case
      * @param dx
      * @param dy
      */
-    public Case_Arme(int dx, int dy)
+    public Case_Arme(int dx, int dy) throws Exception
     {
         super(dx,dy);
     }
