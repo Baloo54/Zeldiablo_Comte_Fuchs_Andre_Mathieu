@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
  */
 public abstract class Element {
 
+    @SuppressWarnings("unused")
     private String IMGPATH; // = "zeldiablo/src/main/resources/textures/slab.png";
     private Image IMG;
   /**

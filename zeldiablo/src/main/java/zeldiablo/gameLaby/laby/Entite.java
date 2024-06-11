@@ -1,6 +1,5 @@
 package zeldiablo.gameLaby.laby;
 
-import javafx.scene.canvas.GraphicsContext;
 import zeldiablo.gameLaby.laby.elements.Case_Vide;
 
 public abstract class Entite extends Element{
