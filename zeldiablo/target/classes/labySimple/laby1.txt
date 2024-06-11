@@ -2,9 +2,9 @@
 10
 1
 Mur Mur Mur Mur Mur Mur Mur Mur Mur Mur
-Mur Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Mur Mur Case_Vide Mur
-Mur Case_Vide Mur Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Mur
-Mur Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Mur Case_Vide Mur Case_Vide 
-Mur Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Mur
+Mur Case_Victoire Case_Vide Case_Vide Case_Vide Case_Vide Mur Mur Case_Vide Mur
+Mur Case_Vide Mur Case_Vide Case_Vide Case_Vide Case_Glaive Case_Vide Case_Vide Mur
+Mur Case_Vide Case_Vide Case_Vide Case_Massue Case_Vide Mur Case_Vide Mur Case_Vide
+Mur Case_Vide Case_Vide Case_Vide Case_Vide Case_Hellbarde Case_Vide Case_Vide Case_Vide Mur
 Mur Case_Vide Case_Vide Mur Mur Personnage Mur Mur Mur Mur
 Mur Mur Mur Mur Mur Mur Mur Mur Mur Mur
