@@ -14,6 +14,9 @@ import zeldiablo.gameLaby.laby.elements.*;
  * @version 3.0
  */
 public class Labyrinthe {
+
+    public int tick = 0;
+
     /**
      * Chemin pour le labyrinthe par défaut
      */
@@ -155,26 +158,29 @@ public class Labyrinthe {
      * deplace les entites
      */
     public void deplacerEntites() throws NullPointerException{
-        for (Entite entite : this.entites.get(this.etagesPerso)) {
-            int[] courante = {entite.getX(), entite.getY()};
-            String[] actions = {HAUT, BAS, GAUCHE, DROITE};
-            // choisir une action aléatoire
-            String action = actions[(int)(Math.random() * actions.length)];
-            // calcule case suivante
-            int[] suivante = getSuivant(courante[0], courante[1], action);
-            // Vérifier si la case suivante est occupée par une entité
-            for (Entite e : this.entites.get(this.etagesPerso)) {
-                if (e.getX() == suivante[0] && e.getY() == suivante[1]) {
-                    // Si la case suivante est occupée par une entité, ne pas déplacer l'entité
+        if (tick%2 == 0){
+            for (Entite entite : this.entites.get(this.etagesPerso)) {
+                int[] courante = {entite.getX(), entite.getY()};
+                String[] actions = {HAUT, BAS, GAUCHE, DROITE};
+                // choisir une action aléatoire
+                String action = actions[(int)(Math.random() * actions.length)];
+                // calcule case suivante
+                int[] suivante = getSuivant(courante[0], courante[1], action);
+                // Vérifier si la case suivante est occupée par une entité
+                for (Entite e : this.entites.get(this.etagesPerso)) {
+                    if (e.getX() == suivante[0] && e.getY() == suivante[1]) {
+                        // Si la case suivante est occupée par une entité, ne pas déplacer l'entité
+                        return;
+                    }
+                }// pareil pour le personnage
+                if(pj.getX() == suivante[0] && pj.getY() == suivante[1]){
                     return;
                 }
-            }// pareil pour le personnage
-            if(pj.getX() == suivante[0] && pj.getY() == suivante[1]){
-                return;
+                getCase(suivante[0], suivante[1]).interagir(this, entite);
+                entite.setDirection(action);
             }
-            getCase(suivante[0], suivante[1]).interagir(this, entite);
-            entite.setDirection(action);
-        }   
+        }
+
     }
     /**
      * méthode permettant de faire attatquer une entité

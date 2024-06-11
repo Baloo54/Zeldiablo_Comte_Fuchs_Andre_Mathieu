@@ -23,15 +23,18 @@ public class LabyDessin implements DessinJeu {
         //taille des cases
         double tileWidth = canvas.getWidth()/labyrinthe.getNbColonnes();
         double tileHeight = canvas.getHeight()/labyrinthe.getNbLignes();
+
+        double tileSize = Math.min(tileWidth, tileHeight);
+
         //affichage des cases
         for(Case c : labyrinthe.getCases().get(labyrinthe.getEtagesPerso())){
-            c.afficher(gc, tileWidth, tileHeight);
+            c.afficher(gc, tileSize,tileSize);
         }   
         //affichage des entites
         for(Entite e : labyrinthe.getEntites().get(labyrinthe.getEtagesPerso())){
-            e.afficher(gc, tileWidth, tileHeight);
+            e.afficher(gc, tileSize, tileSize);
         }
         //affichage du perso
-        labyrinthe.getPerso().afficher(gc, tileWidth, tileHeight);
+        labyrinthe.getPerso().afficher(gc, tileSize, tileSize);
     }
 }
