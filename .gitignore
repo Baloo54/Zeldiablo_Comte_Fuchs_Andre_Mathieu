@@ -4,7 +4,7 @@
 pom.xml
 # Log file
 *.log
-
+data.txt
 # BlueJ files
 *.ctxt
 
