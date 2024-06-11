@@ -31,18 +31,6 @@ public abstract class Case extends Element {
         laby.getCases().get(laby.getEtage()).add(this);
     }
     /**
-     * methode equals
-     * @param o
-     * @return boolean 
-     */
-    public boolean equals(Object o){
-        boolean res = false;
-        if(o instanceof Case){
-            Case c = (Case) o;
-            res = (this.getX() == c.getX() && this.getY() == c.getY());
-        }return res;
-    }
-    /**
      * affiche la case
      * @param c canvas
      */

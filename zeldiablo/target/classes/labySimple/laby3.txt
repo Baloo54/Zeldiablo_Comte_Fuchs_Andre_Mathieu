@@ -5,7 +5,7 @@ Mur Mur Mur Mur Mur Mur Mur Mur Mur Mur
 Mur Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Personnage Mur 
 Mur Case_Vide Case_Vide Case_Effet Case_Vide Case_Vide Fantome Case_Vide Case_Vide Mur 
 Mur Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Mur 
-Mur Case_Vide Case_Victoire Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Mur
+Mur Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Mur
 Mur Case_Vide Case_Vide Case_Vide Case_Vide Mur Mur Mur Case_Vide Mur 
 Mur Case_Vide Case_Vide Case_Vide Case_Vide Mur Case_Vide Mur Case_Vide Mur 
 Mur Case_Vide Case_Vide Case_Vide Case_Vide Mur Mur Mur Case_Vide Mur 

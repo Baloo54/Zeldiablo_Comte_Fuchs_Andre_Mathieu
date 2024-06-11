@@ -117,4 +117,16 @@ public abstract class Element {
       file.delete();
       file2.renameTo(file);
     }
+    /**
+     * methode equals
+     * @param o
+     * @return boolean 
+     */
+    public boolean equals(Object o){
+      boolean res = false;
+      if(o instanceof Element){
+          Element c = (Element) o;
+          res = (this.getX() == c.getX() && this.getY() == c.getY());
+      }return res;
+  }
 }

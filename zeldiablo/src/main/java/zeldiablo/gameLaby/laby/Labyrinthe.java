@@ -238,6 +238,17 @@ public class Labyrinthe {
         return res;
     }
     /**
+     * mort entites
+     * retire les entites mortes du labyrinthe
+     */
+    public void mortEntites(){
+        for (Entite entite : this.entites.get(this.etagesPerso)) {
+            if(entite.getPv() <= 0){
+                entites.get(etagesPerso).remove(entite);
+            }
+        }
+    }
+    /**
      * return entite
      * @return ArrayList<Entite>
      */

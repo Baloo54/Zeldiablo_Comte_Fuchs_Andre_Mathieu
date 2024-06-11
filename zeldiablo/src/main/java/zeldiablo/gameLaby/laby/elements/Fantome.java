@@ -3,7 +3,6 @@ package zeldiablo.gameLaby.laby.elements;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import zeldiablo.gameLaby.laby.Arme;
 import zeldiablo.gameLaby.laby.Entite;
 import zeldiablo.gameLaby.laby.Labyrinthe;
 
@@ -26,13 +25,10 @@ public  class Fantome extends Entite{
     public Fantome(int x, int y) throws Exception{
         super(x, y);
         setNom("Fantome");
-        setPv(10);
+        setPv(1);
         setForce(2);
         setColor(Color.LIGHTSKYBLUE);
         getData();
-    }
-    public void PrendreArme(Arme arme) {
-
     }
     /**
      * Pour le coup faut qu'on redefinisse cette méthode ensemble et qui par ailleur ira dans Entite

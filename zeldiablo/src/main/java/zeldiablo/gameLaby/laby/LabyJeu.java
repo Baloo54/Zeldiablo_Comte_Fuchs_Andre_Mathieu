@@ -46,6 +46,7 @@ public class LabyJeu implements Jeu {
         }
         this.labyrinthe.deplacerEntites();
         this.labyrinthe.attaquer();
+        this.labyrinthe.mortEntites();        
         this.labyrinthe.tick++;
 
     }

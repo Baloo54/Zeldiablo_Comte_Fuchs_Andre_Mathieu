@@ -2,7 +2,6 @@ package zeldiablo.gameLaby.laby.elements;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import zeldiablo.gameLaby.laby.Case;
 import zeldiablo.gameLaby.laby.Entite;
 import zeldiablo.gameLaby.laby.Labyrinthe;

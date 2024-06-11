@@ -3,6 +3,7 @@ package zeldiablo.gameLaby.laby.elements;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import zeldiablo.gameLaby.laby.Arme;
 import zeldiablo.gameLaby.laby.Case;
 import zeldiablo.gameLaby.laby.Entite;
 import zeldiablo.gameLaby.laby.Labyrinthe;
@@ -44,19 +45,15 @@ public class Case_Effet extends Case{
         int r = (int)(Math.random()*3);
         switch (r) {
             case 1:
-                e.setPv(e.getPv()+1);
+                e.setPv(e.getPv()+2);
                 break;
             case 2:
-                e.setPv(e.getPv()-1);
-                break;
-            case 3:
-                //prendre un glaive mais qui n'a pas 3 en degats
-                // mais des dégats aléatoires
-                Glaive g = new Glaive();
-                g.setDegats((int)(Math.random()*6));
-                e.PrendreArme(g);
+                e.setPv(e.getPv()-2);
                 break;
             default:
+               if(!(e instanceof Fantome)){Arme[] armes = {new Hellbarde(), new Glaive(), new Massue()};
+                e.PrendreArme(armes[(int)(Math.random()*3)]);
+                System.out.println(e + "a trouvé une arme !");}
                 break;
         }
         System.out.println(e +" a subi un effet !");
