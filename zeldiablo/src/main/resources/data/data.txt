@@ -1,9 +1,5 @@
 Mur:180
-<<<<<<< HEAD
-Vide:210
-=======
 Vide:211
->>>>>>> 940e3b8 (chore: Mettre à jour les valeurs de PV du personnage et du fantôme)
 Personnage:1
 CaseEffet:1
 Fantome:1
