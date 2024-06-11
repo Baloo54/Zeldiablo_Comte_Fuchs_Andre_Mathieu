@@ -50,5 +50,9 @@ public class Case_Arme extends Case
     {
         this.arme=a;
     }
-
+    /**
+     * getter
+     * @return arme
+     */
+    public Arme getArme(){return arme;}
 }

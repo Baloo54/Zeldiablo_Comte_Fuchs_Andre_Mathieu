@@ -7,7 +7,7 @@ public class Clavier {
     /**
      * controle appuyes
      */
-    public boolean haut, bas, gauche, droite;
+    public boolean haut, bas, gauche, droite, attaquer;
 
     /**
      * stocke les commandes
@@ -37,6 +37,9 @@ public class Clavier {
             // si touche droite
             case D:
                 this.droite = true;
+                break;
+            case SPACE:
+                this.attaquer = true;
                 break;
         }
     }
@@ -70,7 +73,9 @@ public class Clavier {
             case D:
                 this.droite = false;
                 break;
-
+            case SPACE:
+                this.attaquer = false;
+                break;
         }
     }
 }

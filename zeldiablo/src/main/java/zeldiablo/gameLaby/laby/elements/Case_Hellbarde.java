@@ -1,8 +1,6 @@
 package zeldiablo.gameLaby.laby.elements;
 
 
-import zeldiablo.gameLaby.laby.Case;
-
 /**
  * Case Glaive
  * @autor Gabriel Comte, Thomas Fuchs, Jules Andre, Gabin Mattieu

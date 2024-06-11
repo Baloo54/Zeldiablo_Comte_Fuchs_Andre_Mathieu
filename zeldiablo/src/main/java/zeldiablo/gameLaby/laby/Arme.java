@@ -29,8 +29,4 @@ public abstract class Arme {
      * @return degats
      */
     public int getDegats() {return degats;}
-    /**
-     * getter
-     * @return portee
-     */
 }

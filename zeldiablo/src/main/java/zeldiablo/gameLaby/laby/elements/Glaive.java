@@ -9,6 +9,9 @@ import zeldiablo.gameLaby.laby.Arme;
  * @version 3.0
  */
 public class Glaive extends Arme{
+    /**
+     * Constructeur de l'arme Glaive
+     */
     public Glaive()
     {
         setNom("Glaive");

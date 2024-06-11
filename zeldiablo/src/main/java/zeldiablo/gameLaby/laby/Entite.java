@@ -10,6 +10,7 @@ public abstract class Entite extends Element{
     private int pv;
     private int force;
     private Arme arme;
+    private String direction;
     /**
      * super constructeur
      *
@@ -40,9 +41,17 @@ public abstract class Entite extends Element{
      * permet d'attaquer une entite
      * @param e
      */
-    public void attaquer(Entite e){e.subirDegats(this.force);}
+    public void attaquer(Entite e){
+        int degats = this.force;
+        if (this.arme != null) {
+            degats += this.arme.getDegats();
+        }
+        e.subirDegats(degats);
+        System.out.println("degats infligés : " + degats);
+        System.out.println(e + " pv restants : " + e.getPv());
+    }
     /**
-     * à définir poto jsuis pas devin
+     * permet de prendre une arme
      * @param arme
      */
     public void PrendreArme(Arme arme)
@@ -83,5 +92,19 @@ public abstract class Entite extends Element{
     public void afficher(GraphicsContext c, double tileWidth, double tileHeight){
         c.setFill(getColor());
         c.fillOval(getX()*tileWidth, getY()*tileHeight, tileWidth, tileHeight);
+    }
+    /**
+     * getter direction
+     * @return direction
+     */
+    public String getDirection() {
+        return direction;
+    }
+    /**
+     * setter direction
+     * @param direction
+     */
+    public void setDirection(String direction) {
+        this.direction = direction;
     }
 }

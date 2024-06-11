@@ -149,13 +149,59 @@ public class Labyrinthe {
         }
         // Si la case suivante n'est pas occupée par une entité, interagir avec la case suivante
         getCase(suivante[0], suivante[1]).interagir(this, pj);
+        pj.setDirection(action);
     }
     /**
      * deplace les entites
      */
-    public void deplacerEntites() {
+    public void deplacerEntites() throws NullPointerException{
         for (Entite entite : this.entites.get(this.etagesPerso)) {
-            
+            int[] courante = {entite.getX(), entite.getY()};
+            String[] actions = {HAUT, BAS, GAUCHE, DROITE};
+            // choisir une action aléatoire
+            String action = actions[(int)(Math.random() * actions.length)];
+            // calcule case suivante
+            int[] suivante = getSuivant(courante[0], courante[1], action);
+            // Vérifier si la case suivante est occupée par une entité
+            for (Entite e : this.entites.get(this.etagesPerso)) {
+                if (e.getX() == suivante[0] && e.getY() == suivante[1]) {
+                    // Si la case suivante est occupée par une entité, ne pas déplacer l'entité
+                    return;
+                }
+            }// pareil pour le personnage
+            if(pj.getX() == suivante[0] && pj.getY() == suivante[1]){
+                return;
+            }
+            getCase(suivante[0], suivante[1]).interagir(this, entite);
+            entite.setDirection(action);
+        }   
+    }
+    /**
+     * méthode permettant de faire attatquer une entité
+     */
+    public void attaquer(){
+        for (Entite entite : this.entites.get(this.etagesPerso)) {
+            int[] courante = {entite.getX(), entite.getY()};
+            // si le joueur est à proximité
+            int[] suivante = getSuivant(courante[0], courante[1], entite.getDirection());
+            //si c'est le joueur
+            if(pj.getX() == suivante[0] && pj.getY() == suivante[1]){
+                entite.attaquer(pj);
+            }
+        }
+    }
+    /**
+     * méthode permettant de faire attaquer le joueur
+     */
+    public void attaquerJoueur(){
+        int[] courante = {pj.getX(), pj.getY()};
+        // si une entité est à proximité
+        int[] suivante = getSuivant(courante[0], courante[1], pj.getDirection());
+        //si c'est une entité
+        for (Entite entite : this.entites.get(this.etagesPerso)) {
+            if(entite.getX() == suivante[0] && entite.getY() == suivante[1]){
+                pj.attaquer(entite);
+            }
         }
     }
     /**
@@ -182,23 +228,6 @@ public class Labyrinthe {
             if(c.getX() == x && c.getY() == y){
                 res = c;
             }
-        }
-        return res;
-    }
-    /**
-     * permet de verifier si deux entites sont proches
-     * @param x
-     * @param y
-     * @return boolean vrai si les deux entites sont proches
-     */
-    public boolean verifierProximiteJoueur(Entite e1, Entite e2)
-    {
-        boolean res = false;
-        // calcul de la distance
-        int distance = Math.abs(e1.getX() - e2.getX()) + Math.abs(e1.getY() - e2.getY());
-        if(distance <= 1)
-        {
-            res = true;
         }
         return res;
     }

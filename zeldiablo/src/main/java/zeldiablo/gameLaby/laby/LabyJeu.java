@@ -34,7 +34,11 @@ public class LabyJeu implements Jeu {
             this.labyrinthe.deplacerPerso(GAUCHE);
         } else if (clavier.droite) {
             this.labyrinthe.deplacerPerso(DROITE);
+        } else if (clavier.attaquer) {
+            this.labyrinthe.attaquerJoueur();
         }
+        this.labyrinthe.deplacerEntites();
+        this.labyrinthe.attaquer();
     }
 
     @Override
