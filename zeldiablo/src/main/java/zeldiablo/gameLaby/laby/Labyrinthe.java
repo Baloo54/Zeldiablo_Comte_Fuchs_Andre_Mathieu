@@ -105,23 +105,23 @@ public class Labyrinthe {
      * @param action action effectuee
      * @return case suivante
      */
-     public static int[] getSuivant(int x, int y, String action) {
+     public int[] getSuivant(int x, int y, String action) {
         switch (action) {
             case HAUT:
-                // on monte une ligne
-                y--;
+                // on monte une ligne tant que l'on ne sort pas du tableau
+                y = y > 0 ? y - 1 : y;
                 break;
             case BAS:
                 // on descend une ligne
-                y++;
+                y = y < nbLignes - 1 ? y + 1 : y;
                 break;
             case DROITE:
                 // on augmente colonne
-                x++;
+                x = x < nbColonnes - 1 ? x + 1 : x;
                 break;
             case GAUCHE:
                 // on augmente colonne
-                x--;
+                x = x > 0 ? x - 1 : x;
                 break;
             default:
                 throw new Error("action inconnue");
