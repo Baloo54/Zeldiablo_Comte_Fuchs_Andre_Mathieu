@@ -14,8 +14,8 @@ import zeldiablo.gameLaby.laby.Labyrinthe;
 public class Case_Vide extends Case{
     /**
      * super constructeur
-     * @param x
-     * @param y
+     * @param dx
+     * @param dy
      */
     public Case_Vide(int dx, int dy) throws Exception{
         super(dx, dy);
@@ -27,6 +27,7 @@ public class Case_Vide extends Case{
      * méthode pour stocker la case dans le labyrinthe
      * et donner un effet au joueur
      * @param l
+     * @param e
      */
     public void interagir(Labyrinthe l, Entite e){{
         e.setPos(this.getX(), this.getY());

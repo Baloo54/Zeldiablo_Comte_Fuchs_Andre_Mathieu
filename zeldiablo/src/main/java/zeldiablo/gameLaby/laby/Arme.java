@@ -9,7 +9,6 @@ public abstract class Arme {
     // attributs de l'arme
     private String nom;
     private int degats;
-    private int portee;
     /**
      * setter
      * @param nom
@@ -34,10 +33,4 @@ public abstract class Arme {
      * getter
      * @return portee
      */
-    public int getPortee() {return portee;}
-    /**
-     * setter
-     * @param portee
-     */
-    public void setPortee(int portee) {this.portee = portee;}
 }
