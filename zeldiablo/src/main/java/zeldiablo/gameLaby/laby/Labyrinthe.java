@@ -140,7 +140,6 @@ public class Labyrinthe {
         int[] courante = {pj.getX(), pj.getY()};
         // calcule case suivante
         int[] suivante = getSuivant(courante[0], courante[1], action);
-
         // Vérifier si la case suivante est occupée par une entité
         for (Entite entite : this.entites.get(this.etagesPerso)) {
             if (entite.getX() == suivante[0] && entite.getY() == suivante[1]) {
@@ -148,9 +147,16 @@ public class Labyrinthe {
                 return;
             }
         }
-
         // Si la case suivante n'est pas occupée par une entité, interagir avec la case suivante
         getCase(suivante[0], suivante[1]).interagir(this, pj);
+    }
+    /**
+     * deplace les entites
+     */
+    public void deplacerEntites() {
+        for (Entite entite : this.entites.get(this.etagesPerso)) {
+            
+        }
     }
     /**
      * jamais fini
