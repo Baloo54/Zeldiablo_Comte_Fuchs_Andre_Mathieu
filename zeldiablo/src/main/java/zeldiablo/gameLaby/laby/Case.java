@@ -2,14 +2,19 @@ package zeldiablo.gameLaby.laby;
 
 import javafx.scene.canvas.GraphicsContext;
 
-public abstract class Case extends Element{
+/**
+ * classe abstraite Case
+ * @autor Gabriel Comte, Thomas Fuchs, Jules Andre, Gabin Mattieu
+ * @version 3.0
+ */
+public abstract class Case extends Element {
     /**
      * constructeur
      * @param dx position selon x
      * @param dy position selon y
      * 
      */
-    public Case(int dx, int dy) {
+    public Case(int dx, int dy){
         super(dx, dy);
     }
     /**

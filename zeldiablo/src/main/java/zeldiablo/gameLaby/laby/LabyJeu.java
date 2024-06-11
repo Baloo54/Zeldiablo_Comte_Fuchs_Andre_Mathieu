@@ -1,6 +1,5 @@
 package zeldiablo.gameLaby.laby;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import static zeldiablo.gameLaby.laby.Labyrinthe.BAS;
 import static zeldiablo.gameLaby.laby.Labyrinthe.DROITE;
@@ -9,6 +8,11 @@ import static zeldiablo.gameLaby.laby.Labyrinthe.HAUT;
 import zeldiablo.moteurJeu.Clavier;
 import zeldiablo.moteurJeu.Jeu;
 
+/**
+ * Classe LabyJeu
+ * @autor Gabriel Comte, Thomas Fuchs, Jules Andre, Gabin Mattieu
+ * @version 3.0
+ */
 public class LabyJeu implements Jeu {
     private Labyrinthe labyrinthe;
 
@@ -17,7 +21,7 @@ public class LabyJeu implements Jeu {
     }
 
     public LabyJeu() throws IOException {
-        this.labyrinthe = new Labyrinthe("zeldiablo/src/main/resources/labySimple/labymulti.txt");
+        this.labyrinthe = new Labyrinthe(3);
     }
 
     @Override
@@ -38,19 +42,6 @@ public class LabyJeu implements Jeu {
 
     @Override
     public boolean etreFini() {
-        return false;
-    }
-    /**
-     * méthode permettant de choisir le niveau
-     * @param niveau le niveau choisi
-     * @throws IOException
-     * @throws FileNotFoundException
-     */
-    public void choisirNiveau(int niveau) throws IOException{
-        try {
-            this.labyrinthe = new Labyrinthe("zeldiablo/src/main/resources/labySimple/laby" + niveau + ".txt");
-        } catch (IOException e) {
-            this.labyrinthe = new Labyrinthe(Labyrinthe.DEFAULT_MAP);
-        }
+        return labyrinthe.etreFini();
     }
 }

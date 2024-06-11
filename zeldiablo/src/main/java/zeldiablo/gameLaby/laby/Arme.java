@@ -2,25 +2,37 @@ package zeldiablo.gameLaby.laby;
 
 /**
  * Classe Arme représentant les armes du jeu
+ * @autor Gabriel Comte, Thomas Fuchs, Jules Andre, Gabin Mattieu
+ * @version 3.0
  */
-public class Arme {
-
+public abstract class Arme {
     // attributs de l'arme
     private String nom;
     private int degats;
-
-    // constructeur
-    public Arme(String nom, int degats) {
-        this.nom = nom;
-        this.degats = degats;
-    }
-    // getters
-    public String getNom() {
-        return nom;
-    }
-    public int getDegats() {
-        return degats;
-    }
-
-
+    /**
+     * setter
+     * @param nom
+     */
+    public void setNom(String nom) {this.nom = nom;}
+    /**
+     * setter
+     * @param degats
+    */
+    public void setDegats(int degats) {this.degats = degats;}
+    /**
+     * getter 
+     * @return nom
+     */
+    public String getNom() {return nom;}
+    /**
+     * getter
+     * @return degats
+     */
+    public int getDegats() {return degats;}
+    /**
+     * méthode abstraite pour utiliser avec l'arme
+     * @param l
+     * @param e
+     */
+    public abstract void utiliser(Labyrinthe l, Entite e);
 }

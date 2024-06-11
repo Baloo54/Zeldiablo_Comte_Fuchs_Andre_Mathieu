@@ -1,8 +1,8 @@
 5
 7
 0
-XXXXXXX
-XVVVVVX
-XVVPVVX
-XVVVVVX
-XXXXXXX
+Mur Mur Mur Mur Mur Mur Mur
+Mur Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Mur 
+Mur Case_Vide Case_Vide Personnage Case_Vide Case_Vide Mur 
+Mur Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Mur 
+Mur Mur Mur Mur Mur Mur Mur 

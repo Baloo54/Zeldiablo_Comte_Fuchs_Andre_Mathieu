@@ -1,33 +1,23 @@
 package zeldiablo.gameLaby.laby;
 
 import javafx.scene.canvas.GraphicsContext;
+import zeldiablo.gameLaby.laby.elements.Case_Vide;
 
 public abstract class Entite extends Element{
     /**
      * attribut vie
      */
-    private int pv = 3;
+    private int pv;
     private int force;
     private Arme arme;
-    private String nom;
     /**
      * super constructeur
      *
      * @param dx position selon x
      * @param dy position selon y
      */
-    public Entite(int dx, int dy) {
+    public Entite(int dx, int dy){
         super(dx, dy);   
-    }
-    /**
-     * permet de savoir si le l'entite est en x,y
-     *
-     * @param dx position testee
-     * @param dy position testee
-     * @return true si le l'entite est bien en (dx,dy)
-     */
-    public boolean etrePresent(int dx, int dy) {
-        return (this.getX() == dx && this.getY() == dy);
     }
     public void subirDegats(int i){
         this.pv-=i;
@@ -37,8 +27,12 @@ public abstract class Entite extends Element{
      * permet de stocket l'entite dans le labyrinthe
      * @param laby
      */
-    public void stocker(Labyrinthe laby){
-        laby.getCases().get(laby.getEtage()).add(new V(this.getX(), this.getY()));
+    public void stocker(Labyrinthe laby){     
+        try {
+            laby.getCases().get(laby.getEtage()).add(new Case_Vide(this.getX(), this.getY()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         laby.getEntites().get(laby.getEtage()).add(this);
     }
     /**
@@ -71,11 +65,6 @@ public abstract class Entite extends Element{
      */
     public int getPv(){return pv;}
     /**
-     * getter nom
-     * @return nom
-     */
-    public String getNom(){return nom;}
-    /**
      * setPv
      * @param pv
      */
@@ -85,11 +74,6 @@ public abstract class Entite extends Element{
      * @param force
      */
     public void setForce(int force){this.force = force;}
-    /**
-     * setNom
-     * @param nom
-     */
-    public void setNom(String nom){this.nom = nom;}
     /**
      * affiche l'entite
      * @param c canvas

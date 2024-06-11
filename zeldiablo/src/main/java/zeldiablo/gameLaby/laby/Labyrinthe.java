@@ -3,19 +3,21 @@ package zeldiablo.gameLaby.laby;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import zeldiablo.gameLaby.laby.elements.*;
 
 /**
- * classe labyrinthe. represente un labyrinthe avec
- * <ul> des murs </ul>
- * <ul> un personnage (x,y) </ul>
+ * Classe Labyrinthe 
+ * @author Gabriel Comte, Thomas Fuchs, Jules Andre, Gabin Mattieu
+ * @version 3.0
  */
 public class Labyrinthe {
     /**
      * Chemin pour le labyrinthe par défaut
      */
-    public final static String DEFAULT_MAP = "zeldiablo/src/main/resources/labySimple/laby_default";
+    public final static String DEFAULT_MAP = "zeldiablo/src/main/resources/labySimple/laby_default.txt";
     /**
      * constantes actions possibles
      */
@@ -34,40 +36,10 @@ public class Labyrinthe {
      * tableau d'entites
      */
     private ArrayList<ArrayList<Entite>> entites = new ArrayList<ArrayList<Entite>>();
-    // perso
-    private P pj;
-    /**
-     * retourne la case suivante selon une actions
-     *
-     * @param x case depart
-     * @param y case depart
-     * @param action action effectuee
-     * @return case suivante
-     */
-    static int[] getSuivant(int x, int y, String action) {
-        switch (action) {
-            case HAUT:
-                // on monte une ligne
-                y--;
-                break;
-            case BAS:
-                // on descend une ligne
-                y++;
-                break;
-            case DROITE:
-                // on augmente colonne
-                x++;
-                break;
-            case GAUCHE:
-                // on augmente colonne
-                x--;
-                break;
-            default:
-                throw new Error("action inconnue");
-        }
-        int[] res = {x, y};
-        return res;
-    }
+    // personnage
+    private Personnage pj;
+    // etreFini
+    private boolean fini = false;
     /**
      * charge le labyrinthe
      *
@@ -75,11 +47,14 @@ public class Labyrinthe {
      * @return labyrinthe cree
      * @throws IOException probleme a la lecture / ouverture
      */
-    public Labyrinthe(String nom) throws IOException {
+    public Labyrinthe(int niveau) throws IOException {
+        //création d'un fichier data.txt pour stocker les données
+        FileWriter f =  new FileWriter ("zeldiablo/src/main/resources/data/data.txt");
+        f.close();
         // ouvrir fichier
         FileReader fichier;
         try{
-            fichier = new FileReader(nom);
+            fichier = new FileReader("zeldiablo/src/main/resources/labySimple/laby"+niveau+".txt");
         } catch (FileNotFoundException e){
             fichier = new FileReader(DEFAULT_MAP);
         }
@@ -103,24 +78,56 @@ public class Labyrinthe {
             while (ligne != null && numeroLigne<nbColonnes) {
             // parcours de la ligne
             try {
-                for (int colonne = 0; colonne < ligne.length(); colonne++) {
-                    // conversion de la case en objet Case
-                    Class<?> clazz = Class.forName("zeldiablo.gameLaby.laby." + ligne.charAt(colonne));
+                String[] casesLigne = ligne.split(" ");
+                for (int colonne = 0; colonne < nbColonnes; colonne++) {
+                    Class<?> clazz = Class.forName("zeldiablo.gameLaby.laby.elements." + casesLigne[colonne]);
                     Element e = (Element)clazz.getConstructor(int.class, int.class).newInstance(colonne, numeroLigne);
                     // stockage
                     e.stocker(this);
                 }
             }catch (Exception e) {
-                throw new Error("Erreur lors de la lecture du labyrinthe" + e.getMessage());
+                throw new Error("Erreur lors de la lecture du fichier");
             }
             // lecture
             ligne = bfRead.readLine();
             numeroLigne++;
-        }
+            }
         etage++;
-    }
+        }
         // ferme fichier
         bfRead.close();
+    }
+    /**
+     * retourne la case suivante selon une actions
+     *
+     * @param x case depart
+     * @param y case depart
+     * @param action action effectuee
+     * @return case suivante
+     */
+     public static int[] getSuivant(int x, int y, String action) {
+        switch (action) {
+            case HAUT:
+                // on monte une ligne
+                y--;
+                break;
+            case BAS:
+                // on descend une ligne
+                y++;
+                break;
+            case DROITE:
+                // on augmente colonne
+                x++;
+                break;
+            case GAUCHE:
+                // on augmente colonne
+                x--;
+                break;
+            default:
+                throw new Error("action inconnue");
+        }
+        int[] res = {x, y};
+        return res;
     }
     /**
      * deplace le personnage en fonction de l'action.
@@ -151,8 +158,12 @@ public class Labyrinthe {
      * @return fin du jeu
      */
     public boolean etreFini() {
-        return false;
+        return fini;
     }
+    /**
+     * finir le jeu
+     */
+    public void finir(){fini = true;}
     /**
      * return mur en (i,j)
      * @param x
@@ -168,20 +179,23 @@ public class Labyrinthe {
         }
         return res;
     }
-
-    public boolean verifierProximiteJoueur(P joueur,F fantonme)
+    /**
+     * permet de verifier si deux entites sont proches
+     * @param x
+     * @param y
+     * @return boolean vrai si les deux entites sont proches
+     */
+    public boolean verifierProximiteJoueur(Entite e1, Entite e2)
     {
-        int distance = Math.abs(joueur.getX() - fantonme.getX()) + Math.abs(joueur.getY() - fantonme.getY());
+        boolean res = false;
+        // calcul de la distance
+        int distance = Math.abs(e1.getX() - e2.getX()) + Math.abs(e1.getY() - e2.getY());
         if(distance <= 1)
         {
-            return true;
+            res = true;
         }
-
-        return false;
+        return res;
     }
-
-
-
     /**
      * return entite
      * @return ArrayList<Entite>
@@ -191,7 +205,7 @@ public class Labyrinthe {
      * return personnage
      * @return P
      */
-    public P getPerso(){return pj;}
+    public Personnage getPerso(){return pj;}
     /**
      * return etage
      * @return int
@@ -226,7 +240,7 @@ public class Labyrinthe {
      * set Pj
      * @param i
      */
-    public void setPj(P i){pj = i;}
+    public void setPj(Personnage i){pj = i;}
     /**
      * set Case
      * @param Case

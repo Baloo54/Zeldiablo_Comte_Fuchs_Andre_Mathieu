@@ -1,10 +1,10 @@
 7
 10
 1
-XXXXXXXXXX
-XVVVVVXXVX
-XVXVVVVVVX
-XVVVVVXVXV
-XVVVVVVVVX
-XVVXXPXXXX
-XXXXXXXXXX
+Mur Mur Mur Mur Mur Mur Mur Mur Mur Mur
+Mur Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Mur Mur Case_Vide Mur
+Mur Case_Vide Mur Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Mur
+Mur Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Mur Case_Vide Mur Case_Vide 
+Mur Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Case_Vide Mur
+Mur Case_Vide Case_Vide Mur Mur Personnage Mur Mur Mur Mur
+Mur Mur Mur Mur Mur Mur Mur Mur Mur Mur
