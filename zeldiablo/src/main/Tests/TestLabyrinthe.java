@@ -90,6 +90,14 @@ public class TestLabyrinthe {
         });
     }
 
+    public class LabyJeuTest {
+
+    @Test
+    public void testEtreFini() throws IOException {
+        LabyJeu labyJeu = new LabyJeu();
+        assertFalse(labyJeu.etreFini());
+    }
+
     //TODO TESTER SI LE JEU SE FINI BIEN
 
 }

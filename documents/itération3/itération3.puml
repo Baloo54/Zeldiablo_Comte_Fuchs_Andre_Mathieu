@@ -33,3 +33,52 @@ activate monstre
 end
 deactivate laby
 @enduml
+
+@startuml deplacementEntites
+
+actor User
+
+participant Labyrinthe
+participant Entite
+participant Case
+participant P
+
+User -> Labyrinthe: deplacerEntites()
+activate Labyrinthe
+
+Labyrinthe -> Labyrinthe: get(etagesPerso)
+activate Entite
+
+loop for each Entite
+    Labyrinthe -> Entite: getX()
+    Labyrinthe -> Entite: getY()
+
+    Labyrinthe -> Labyrinthe: Math.random() * actions.length
+    Labyrinthe -> Labyrinthe: getSuivant(courante[0], courante[1], action)
+
+    loop for each Entite
+        Labyrinthe -> Entite: getX()
+        Labyrinthe -> Entite: getY()
+        alt Case suivante occupée
+            return
+        end
+    end
+
+    Labyrinthe -> P: getX()
+    Labyrinthe -> P: getY()
+    alt Case suivante occupée par pj
+        return
+    end
+
+    Labyrinthe -> Case: getCase(suivante[0], suivante[1])
+    activate Case
+    Case -> Labyrinthe: interagir(this, entite)
+    deactivate Case
+
+    Labyrinthe -> Entite: setDirection(action)
+end
+
+deactivate Entite
+deactivate Labyrinthe
+
+@enduml
