@@ -34,11 +34,19 @@ public class LabyJeu implements Jeu {
             this.labyrinthe.deplacerPerso(GAUCHE);
         } else if (clavier.droite) {
             this.labyrinthe.deplacerPerso(DROITE);
-        } else if (clavier.attaquer) {
+        }
+        else if(labyrinthe.getPerso().getPv()<=0)
+        {
+            System.out.println("Defaite ! Le joueur est mort ");
+            labyrinthe.finir();
+        }
+        else if(clavier.attaquer)
+        {
             this.labyrinthe.attaquerJoueur();
         }
         this.labyrinthe.deplacerEntites();
         this.labyrinthe.attaquer();
+
     }
 
     @Override

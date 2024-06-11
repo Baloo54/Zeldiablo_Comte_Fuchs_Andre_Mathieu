@@ -25,7 +25,7 @@ public class Personnage extends Entite{
     // super constructeur
     public Personnage(int dx, int dy) throws Exception{
         super(dx, dy);
-        setPv(20);
+        setPv(6);
         setForce(2);
         setColor(Color.RED);
         setNom("Personnage");

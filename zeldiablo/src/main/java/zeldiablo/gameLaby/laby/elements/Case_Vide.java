@@ -17,7 +17,7 @@ import java.io.FileInputStream;
  */
 public class Case_Vide extends Case{
 
-    private String IMGPATH = "zeldiablo/src/main/resources/textures/wall.png";
+    private String IMGPATH = "zeldiablo/src/main/resources/textures/slab.png";
     private Image IMG = new Image( new FileInputStream(this.IMGPATH));
 
     public void afficher(GraphicsContext c, double tileWidth, double tileHeight){

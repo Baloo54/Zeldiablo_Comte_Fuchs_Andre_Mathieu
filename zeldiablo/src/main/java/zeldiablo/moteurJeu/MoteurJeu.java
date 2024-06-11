@@ -4,6 +4,7 @@ package zeldiablo.moteurJeu;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.event.EventHandler;
@@ -170,6 +171,7 @@ public class MoteurJeu extends Application {
                 if (dureeEnMilliSecondes > dureeFPS) {
                     // met a jour le jeu en passant les touches appuyees
                     jeu.update(dureeEnMilliSecondes / 1_000., controle);
+                    if(jeu.etreFini())Platform.exit();
 
                     // dessine le jeu
                     dessin.dessinerJeu(jeu, canvas);
@@ -187,4 +189,6 @@ public class MoteurJeu extends Application {
         // lance l'animation
         timer.start();
     }
+
+
 }

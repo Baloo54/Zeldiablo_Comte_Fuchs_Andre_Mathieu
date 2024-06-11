@@ -43,7 +43,7 @@ public class Labyrinthe {
     /**
      * charge le labyrinthe
      *
-     * @param nom nom du fichier de labyrinthe
+     * @param niveau nom du fichier de labyrinthe
      * @return labyrinthe cree
      * @throws IOException probleme a la lecture / ouverture
      */
@@ -218,8 +218,8 @@ public class Labyrinthe {
     public void finir(){fini = true;}
     /**
      * return mur en (i,j)
-     * @param x
-     * @param y
+     * @param e1
+     * @param e2
      * @return
      */
     public Case getCase(int x, int y) {
@@ -278,7 +278,7 @@ public class Labyrinthe {
     public void setPj(Personnage i){pj = i;}
     /**
      * set Case
-     * @param Case
+     * @param c
      */
     public void setCases(Case c){
         cases.get(etagesPerso).remove(c);
