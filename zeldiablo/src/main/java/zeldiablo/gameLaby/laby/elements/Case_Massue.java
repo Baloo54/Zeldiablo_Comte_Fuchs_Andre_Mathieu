@@ -2,6 +2,7 @@ package zeldiablo.gameLaby.laby.elements;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import zeldiablo.gameLaby.laby.LabyDessin;
 
 import java.io.FileInputStream;
 

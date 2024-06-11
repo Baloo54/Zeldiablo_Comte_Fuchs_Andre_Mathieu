@@ -13,13 +13,29 @@ import java.io.FileInputStream;
  * @autor Gabriel Comte, Thomas Fuchs, Jules Andre, Gabin Mattieu
  * @version 3.0
  */
+
 public class Personnage extends Entite{
 
+    private int max_health = 15;
     private String IMGPATH = "zeldiablo/src/main/resources/textures/hero_sideway.png";
+    private String HEART_FULL_PATH = "zeldiablo/src/main/resources/textures/heart_full.png";
+
+    private String HEART_EMPTY_PATH = "zeldiablo/src/main/resources/textures/heart_empty.png";
+
+    private Image heart_full_image = new Image(new FileInputStream((this.HEART_FULL_PATH)));
+    private Image heart_empty_image = new Image(new FileInputStream((this.HEART_EMPTY_PATH)));
+
     private Image IMG = new Image( new FileInputStream(this.IMGPATH));
 
     public void afficher(GraphicsContext c, double tileWidth, double tileHeight){
         c.drawImage(IMG ,getX()*tileWidth, getY()*tileHeight-0.5*tileHeight, tileWidth, tileHeight);
+        for(int i = 0; i < max_health; i++){
+            if(this.getPv() < i){
+                c.drawImage(heart_empty_image, i*tileWidth/2, 0 ,  0.5*tileWidth, 0.5*tileHeight);
+            } else {
+                c.drawImage(heart_full_image, i*tileWidth/2, 0 ,  0.5*tileWidth, 0.5*tileHeight);
+            }
+        }
     };
 
     // super constructeur

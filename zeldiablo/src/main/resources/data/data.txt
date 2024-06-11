@@ -1,7 +1,7 @@
 Mur:181
 Vide:212
 Personnage:1
-CaseEffet:2
+CaseEffet:1
 Fantome:1
 Escalier_Monter:3
 Passage_Secret:2
