@@ -82,3 +82,50 @@ deactivate Entite
 deactivate Labyrinthe
 
 @enduml
+
+@startuml GetData
+participant "Element" as E
+participant "File" as F1
+participant "File" as F2
+participant "BufferedWriter" as BW
+participant "BufferedReader" as BR
+participant "String" as S
+
+activate E
+E -> F1: new File("data.txt")
+activate F1
+F1 --> E
+E -> F2: new File("data2.txt")
+activate F2
+F2 --> E
+E -> BW: new BufferedWriter(new FileWriter(F2))
+activate BW
+BW --> E
+E -> BR: new BufferedReader(new FileReader(F1))
+activate BR
+BR --> E
+E -> BR: readLine()
+BR --> E: line
+alt line.split(":")[0] equals this.nom
+    E -> S: split(":")
+    activate S
+    S --> E: data
+    E -> S: parseInt(data[1])
+    S --> E: nb
+    E -> BW: write(this.nom + ":" + (nb+1) + "\n")
+else
+    E -> BW: write(line + "\n")
+end
+alt not found
+    E -> BW: write(this.nom + ":1")
+end
+E -> BW: close()
+deactivate BW
+E -> BR: close()
+deactivate BR
+E -> F1: delete()
+deactivate F1
+E -> F2: renameTo(F1)
+deactivate F2
+deactivate E
+@enduml
